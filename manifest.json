@@ -1,0 +1,12 @@
+{
+  "name": "SkySpark Tweaks",
+  "description": "...",
+  "version": "1.0",
+  "manifest_version": 3,
+  "content_scripts": [
+  {
+  "matches": ["http://*/ui/*", "https://*/ui/*"],
+    "js": ["content.js"],
+    "run_at": "document_end"
+  }]
+}
