@@ -1,7 +1,7 @@
-function addStyle(className, styleString) {
+function addStyle(styleString) {
   const style = document.createElement('style');
   style.textContent = styleString;
-  style.classList.add(className);
+  style.classList.add("skyspark-tweaks-style");
   document.head.append(style);
 }
 

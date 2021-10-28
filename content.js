@@ -30,8 +30,7 @@ function onHrefChange() {
 }
 
 function _applyStyles() {
-  addStyle("skyspark-tweaks-style", ".cm-property { color: #cf7900; }");
-  //addStyle("skyspark-tweaks-style", ".skyspark-tweaks-smooth-transition { transition: 100ms; }");
+  addStyle(".cm-property { color: #cf7900; }");
 }
 
 function _checkPageLoad() {
