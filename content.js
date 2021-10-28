@@ -1,55 +1,70 @@
-var oldHref = document.location.href;
-var checkIntervalId;
+var _oldHref;
+var _checkPageLoadId;
+var _editorFuncColors;
+var _editorFuncHistory;
+var _buttonSideSwitch;
 
 window.onload = function () {
-  addStyle("skyspark-tweaks-style", ".cm-property { color: #cf7900; }");
-  addStyle("skyspark-tweaks-style", ".skyspark-tweaks-smooth-transition { transition: 100ms; }");
-  addObserver();
-  checkIntervalId = setInterval(checkPageLoad, 100);
-};
+  _oldHref = document.location.href;
+  _editorFuncColors = new EditorFuncColors();
+  _editorFuncHistory = new EditorFuncHistory();
+  _buttonSideSwitch = new ButtonSideSwitch();
 
-// Functions
+  _applyStyles();
+  _startObeserver(null, onHrefChange);
 
-function onChange() {
-  console.log("onChange");
-  scan();
+  _checkPageLoadId = setInterval(_checkPageLoad, 100);
 }
 
-function checkPageLoad() {
+function onStart() {
+  _buttonSideSwitch.onStart();
+  
+  
+}
+
+function onHrefChange() {
+  _editorFuncColors.onHrefChange();
+  _editorFuncHistory.onHrefChange();
+  
+  
+}
+
+function _applyStyles() {
+  addStyle("skyspark-tweaks-style", ".cm-property { color: #cf7900; }");
+  //addStyle("skyspark-tweaks-style", ".skyspark-tweaks-smooth-transition { transition: 100ms; }");
+}
+
+function _checkPageLoad() {
   if ($(".domkit-Box").length > 1) {
-    clearInterval(checkIntervalId);
-    onChange();
+    clearInterval(_checkPageLoadId);
+    onHrefChange();
+    onStart();
   }
 }
 
-function addStyle(className, styleString) {
-  const style = document.createElement('style');
-  style.textContent = styleString;
-  style.classList.add(className);
-  document.head.append(style);
-}
-
-function addObserver(){
+function _startObeserver(cbOnChange, cbOnHrefChange) {
   var bodyList = document.querySelector("body")
   var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
-      
+
       //console.log(new Date(), mutation);
       // todo - check for currently selected fn
       // todo - check for currently hovered fn?
-      
-      if (oldHref != document.location.href) {
-        oldHref = document.location.href;
-        onChange();
+
+      //cbOnChange()
+
+      if (_oldHref != document.location.href) {
+        _oldHref = document.location.href;
+        cbOnHrefChange();
       }
     });
   });
-  
+
   var config = {
     childList: true,
     subtree: true,
     attributes: true
   };
-  
+
   observer.observe(bodyList, config);
 }

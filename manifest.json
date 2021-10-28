@@ -19,10 +19,11 @@
         "https://*/ui/*"
       ],
       "js": [
-        "thirdParty/jquery-3.6.0.js",
+        "lib/jquery-3.6.0.js",
+        "components/editor-func-colors.js",
+        "components/editor-func-history.js",
+        "components/button-side-switch.js",
         "content.js",
-        "scanner.js",
-        "modifier.js",
         "tools.js"
       ],
       "run_at": "document_end"

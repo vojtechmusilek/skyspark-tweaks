@@ -1,3 +1,10 @@
+function addStyle(className, styleString) {
+  const style = document.createElement('style');
+  style.textContent = styleString;
+  style.classList.add(className);
+  document.head.append(style);
+}
+
 function camelSplitMax(str, maxCamels) {
   var strCamelSplit = str.replace(/([a-z0-9])([A-Z])/g, '$1 $2').split(' ');
   var text = ""
