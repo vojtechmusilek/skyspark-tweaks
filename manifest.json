@@ -3,10 +3,29 @@
   "description": "...",
   "version": "1.0",
   "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "content_scripts": [
-  {
-  "matches": ["http://*/ui/*", "https://*/ui/*"],
-    "js": ["content.js"],
-    "run_at": "document_end"
-  }]
+    {
+      "matches": [
+        "http://*/ui/*",
+        "https://*/ui/*"
+      ],
+      "js": [
+        "thirdParty/jquery-3.6.0.js",
+        "content.js",
+        "scanner.js",
+        "modifier.js",
+        "tools.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
 }
