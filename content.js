@@ -6,9 +6,10 @@ window.onload = function () {
   _buttonEditorSettings = new ButtonEditorSettings();
   _editorFuncSettings = new EditorFuncSettings();
   _buttons = new Buttons();
+  _spamLock = false;
 
   _applyStyles();
-  _startObeserver(onChange, onHrefChange);
+  _startObeserver(onChange);
 
   _checkPageLoadId = setInterval(_checkPageLoad, 100);
 }
@@ -17,10 +18,6 @@ function onStart() {
   _buttons.onStart();
   _buttonSideSwitch.onStart();
   _buttonEditorSettings.onStart();
-}
-
-function onHrefChange() {
-  
 }
 
 function onChange() {
@@ -32,7 +29,7 @@ function onChange() {
 function _applyStyles() {
   var key = "skysparkTweaks.customCss";
   var css = localStorage.getItem(key);
-  if(css == null) {
+  if (css == null) {
     css = ".cm-property { color: #cf7900; }";
     localStorage.setItem(key, css);
   }
@@ -42,19 +39,24 @@ function _applyStyles() {
 function _checkPageLoad() {
   if ($(".domkit-Box").length > 1) {
     clearInterval(_checkPageLoadId);
-    onHrefChange();
+    onChange();
     onStart();
   }
 }
 
-function _startObeserver(cbOnChange, cbOnHrefChange) {
+function _startObeserver(cbOnChange) {
   var bodyList = document.querySelector("body")
   var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
-      cbOnChange()
+      if (!_spamLock) {
+        cbOnChange()
+        _spamLock = true;
+        setTimeout(() => { _spamLock = false; }, 100);
+      }
+      
       if (_oldHref != document.location.href) {
         _oldHref = document.location.href;
-        cbOnHrefChange();
+        cbOnChange();
       }
     });
   });
