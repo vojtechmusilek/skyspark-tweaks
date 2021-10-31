@@ -16,7 +16,7 @@ class ButtonEditorSettings {
   
   _click() {
     var visible = getOption("settingsVisible");
-    setOption("settingsVisible", !visible);
+    setOption("settingsVisible", visible == 0 ? 1 : 0);
     if(visible == true){
       $("#skyspark-tweaks-settings").remove();
     }

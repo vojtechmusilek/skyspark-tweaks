@@ -9,19 +9,21 @@ function getOption(type) {
       setOption(type, 3);
     }
     else if (type == "settingsVisible") {
-      setOption(type, false);
+      setOption(type, 0);
     }
     else {
-      setOption(type, "undefined")
+      setOption(type, "undefined");
     }
     return getOption(type);
   }
-  if (type == "maxHistory" || type == "maxCamels") return parseInt(val);
-  if (type == "settingsVisible") return val == "true" ? true : false;
+  if (type == "maxHistory" || type == "maxCamels" || type == "settingsVisible") return parseInt(val);
+  //if (type == "settingsVisible") return val == "true" ? true : false;
   return val;
 }
 
 function setOption(type, val) {
+  if(val < 0) return;
+  
   var key = window.location.pathname.replace("/ui/", "skysparkTweaks.") + "." + type;
   localStorage.setItem(key, val);
 

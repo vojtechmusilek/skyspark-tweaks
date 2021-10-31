@@ -30,6 +30,7 @@
         "lib/jquery-3.6.0.js",
         "components/editor-func-colors.js",
         "components/editor-func-history.js",
+        "components/editor-func-settings.js",
         "components/button-side-switch.js",
         "components/button-editor-settings.js",
         "components/buttons.js",
