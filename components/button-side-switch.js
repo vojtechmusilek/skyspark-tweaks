@@ -1,7 +1,11 @@
 class ButtonSideSwitch {
   onStart() {
+    var imgSrc = "";
+    $(".domkit-Box .ui-WsHeader").find("img").each((i, node) => {
+      if($(node).attr("src").includes("clone?")) imgSrc = $(node).attr("src").replace("clone?", "layout2h?");
+    });
     var id = "skyspark-tweaks-button-side-switch";
-    var img = '<img class="ui-Icon" src="/ui/x/24daeae5-9feb24af/icon/layout2h?s=solid&amp;c=fff" style="width: 16px; height: 16px;">';
+    var img = `<img class="ui-Icon" src="${imgSrc}" style="width: 16px; height: 16px;">`;
     var button = `<div id="${id}" class="domkit-control domkit-control-button domkit-Button" tabindex="0" style="padding: 3px 9px; float: right;">${img}</div>`;
     var elem = $(button)
     elem.click(this._click);

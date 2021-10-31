@@ -10,21 +10,27 @@ window.onload = function () {
   _startObeserver(onChange, onHrefChange);
 
   _checkPageLoadId = setInterval(_checkPageLoad, 100);
+  
+  
+  
+  
+  
+  //console.log(a);
 }
 
 function onStart() {
   _buttons.onStart();
   _buttonSideSwitch.onStart();
   _buttonEditorSettings.onStart();
-  
 }
 
 function onHrefChange() {
-  _editorFuncHistory.onHrefChange();
+  
 }
 
 function onChange() {
   _editorFuncColors.onChange();
+  _editorFuncHistory.onChange();
 }
 
 function _applyStyles() {

@@ -1,33 +1,48 @@
 function getOption(type) {
-  var key = window.location.pathname + "." + type;
+  var key = window.location.pathname.replace("/ui/", "skysparkTweaks.") + "." + type;
   var val = localStorage.getItem(key);
   if (val == null) {
     if (type == "maxCamels") {
-      setOption(type, 1)
+      setOption(type, 1);
     }
     else if (type == "maxHistory") {
-      setOption(type, 3)
+      setOption(type, 3);
+    }
+    else if (type == "settingsVisible") {
+      setOption(type, false);
     }
     else {
       setOption(type, "undefined")
     }
     return getOption(type);
   }
-  if(!isNaN(val)) return parseInt(val)
+  if (type == "maxHistory" || type == "maxCamels") return parseInt(val);
+  if (type == "settingsVisible") return val == "true" ? true : false;
   return val;
 }
 
 function setOption(type, val) {
-  var key = window.location.pathname + "." + type;
+  var key = window.location.pathname.replace("/ui/", "skysparkTweaks.") + "." + type;
   localStorage.setItem(key, val);
-  
+
   if (type == "maxCamels") {
     $("#skyspark-tweaks-camel-current").text(val);
-    onHrefChange();
+
+    EditorFuncColors.removeColors();
   }
   else if (type == "maxHistory") {
-    $("#skyspark-tweaks-camel-current").text(val);
-    onHrefChange();
+    $("#skyspark-tweaks-history-current").text(val);
+    var history = $(".skyspark-tweaks-func-history")
+    for (let index = 0; index < history.length; index++) {
+      if (index >= val) {
+        history[index].remove();
+      }
+    }
+  }
+  else if (type == "settingsVisible") {
+    var src = $("#skyspark-tweaks-button-editor-settings").children().first().attr("src");
+    src = val ? src.replace("s=outline", "s=solid") : src.replace("s=solid", "s=outline");
+    $("#skyspark-tweaks-button-editor-settings").children().first().attr("src", src);
   }
 }
 

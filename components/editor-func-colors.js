@@ -4,7 +4,7 @@ class EditorFuncColors {
       this._applyColors(node.children);
     })
   }
-  
+
   _applyColors(nodes) {
     var maxCamels = getOption("maxCamels");
     var colorizedClassName = "skyspark-tweaks-colorized";
@@ -29,5 +29,12 @@ class EditorFuncColors {
       spanElem.classList.add(colorizedClassName);
       spanElem.innerHTML = '<span style="' + style + '">' + funcNamePartColorized + '</span>' + funcNamePartNormal;
     }
+  }
+  
+  static removeColors() {
+    $(".skyspark-tweaks-colorized").each((i, node) => {
+      node.innerHTML = $(node).text();
+      $(node).removeClass("skyspark-tweaks-colorized");
+    })
   }
 }
