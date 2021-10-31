@@ -1,6 +1,6 @@
 {
   "name": "SkySpark Tweaks",
-  "description": "...",
+  "description": "Adds small tweaks to SkySpark.",
   "version": "1.0",
   "manifest_version": 3,
   "content_scripts": [
@@ -22,5 +22,11 @@
       ],
       "run_at": "document_end"
     }
-  ]
+  ],
+  "icons": {
+    "16": "/images/skyspark_tweaks16.png",
+    "32": "/images/skyspark_tweaks32.png",
+    "48": "/images/skyspark_tweaks48.png",
+    "128": "/images/skyspark_tweaks128.png"
+  }
 }

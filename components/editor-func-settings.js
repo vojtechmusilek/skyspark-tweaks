@@ -1,6 +1,9 @@
 class EditorFuncSettings {
   onChange() {
     $(".domkit-Box .dom-style-autogen-0").each((index, node) => {
+      var cl = $(node).parent().parent().attr('class');
+      if(cl != "domkit-Box") return;
+      
       this._addSettings(node);
     })
   }

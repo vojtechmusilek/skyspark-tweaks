@@ -1,10 +1,13 @@
 class EditorFuncColors {
   onChange() {
     $(".domkit-Box .dom-style-autogen-0").each((index, node) => {
+      var cl = $(node).parent().parent().attr('class');
+      if(cl != "domkit-Box") return;
+      
       this._applyColors(node.children);
     })
   }
-
+  
   _applyColors(nodes) {
     var maxCamels = getOption("maxCamels");
     var colorizedClassName = "skyspark-tweaks-colorized";

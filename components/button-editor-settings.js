@@ -4,6 +4,7 @@ class ButtonEditorSettings {
     $(".domkit-Box .ui-WsHeader").find("img").each((i, node) => {
       if($(node).attr("src").includes("clone?")) imgSrc = $(node).attr("src").replace("clone?", "command?");
     });
+    
     if(getOption("settingsVisible") == false) imgSrc = imgSrc.replace("s=solid", "s=outline");
     
     var id = "skyspark-tweaks-button-editor-settings";
