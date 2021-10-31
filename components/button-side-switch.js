@@ -1,36 +1,20 @@
 class ButtonSideSwitch {
-  _buttonId = "skyspark-tweaks-button-side-switch";
-
   onStart() {
-    $(".domkit-Box .ui-WsHeader").children().each((index, node) => {
-      if (node.style.cssText == "height: 34px; padding: 5px 10px 5px 5px;") {
-        this._addButton(node);
-      }
-    })
+    var id = "skyspark-tweaks-button-side-switch";
+    var img = '<img class="ui-Icon" src="/ui/x/24daeae5-9feb24af/icon/layout2h?s=solid&amp;c=fff" style="width: 16px; height: 16px;">';
+    var button = `<div id="${id}" class="domkit-control domkit-control-button domkit-Button" tabindex="0" style="padding: 3px 9px; float: right;">${img}</div>`;
+    var elem = $(button)
+    elem.click(this._click);
+    
+    $("#skyspark-tweaks-buttons").append(elem);
   }
-
-  _addButton(parent) {
-    $(parent).children().each((index, node) => {
-      if (node.style.cssText == "padding: 3px 9px; float: right;") {
-        var cloned = $(node).clone();
-        var child = cloned.children().first();
-        var oldSrc = child.attr('src');
-        var newSrc = oldSrc.replace("clone?", "layout2h?");
-        $(node).after(cloned);
-
-        child.attr('src', newSrc);
-        cloned.attr('id', this._buttonId);
-        cloned.click(this._buttonAction);
-      }
-    })
-
-  }
-
-  _buttonAction() {
+  
+  _click() {
     var hash = window.location.hash.replace("#", "");
+    if (!hash) return;
     var data = sessionStorage.getItem(hash);
     var trimmed = data.substring(1, data.length - 1);
-    
+
     var hasNull = false;
     var obj = {};
     var stack = "";
@@ -62,14 +46,9 @@ class ButtonSideSwitch {
       }
     }
     var res = `{left:${obj.right} right:${obj.left}}`
-    
-    console.log({
-      before: data,
-      after: res
-    });
-    
+
     if (hasNull) {
-      alert("Split view not opened")
+      //alert("Split view not opened")
     }
     else {
       sessionStorage.setItem(hash, res);

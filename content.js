@@ -1,32 +1,30 @@
-var _oldHref;
-var _checkPageLoadId;
-var _editorFuncColors;
-var _editorFuncHistory;
-var _buttonSideSwitch;
-
 window.onload = function () {
   _oldHref = document.location.href;
   _editorFuncColors = new EditorFuncColors();
   _editorFuncHistory = new EditorFuncHistory();
   _buttonSideSwitch = new ButtonSideSwitch();
+  _buttonEditorSettings = new ButtonEditorSettings();
+  _buttons = new Buttons();
 
   _applyStyles();
-  _startObeserver(null, onHrefChange);
+  _startObeserver(onChange, onHrefChange);
 
   _checkPageLoadId = setInterval(_checkPageLoad, 100);
 }
 
 function onStart() {
+  _buttons.onStart();
   _buttonSideSwitch.onStart();
-  
+  _buttonEditorSettings.onStart();
   
 }
 
 function onHrefChange() {
-  _editorFuncColors.onHrefChange();
   _editorFuncHistory.onHrefChange();
-  
-  
+}
+
+function onChange() {
+  _editorFuncColors.onChange();
 }
 
 function _applyStyles() {
@@ -45,13 +43,7 @@ function _startObeserver(cbOnChange, cbOnHrefChange) {
   var bodyList = document.querySelector("body")
   var observer = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
-
-      //console.log(new Date(), mutation);
-      // todo - check for currently selected fn
-      // todo - check for currently hovered fn?
-
-      //cbOnChange()
-
+      cbOnChange()
       if (_oldHref != document.location.href) {
         _oldHref = document.location.href;
         cbOnHrefChange();

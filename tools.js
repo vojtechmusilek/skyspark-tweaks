@@ -1,3 +1,36 @@
+function getOption(type) {
+  var key = window.location.pathname + "." + type;
+  var val = localStorage.getItem(key);
+  if (val == null) {
+    if (type == "maxCamels") {
+      setOption(type, 1)
+    }
+    else if (type == "maxHistory") {
+      setOption(type, 3)
+    }
+    else {
+      setOption(type, "undefined")
+    }
+    return getOption(type);
+  }
+  if(!isNaN(val)) return parseInt(val)
+  return val;
+}
+
+function setOption(type, val) {
+  var key = window.location.pathname + "." + type;
+  localStorage.setItem(key, val);
+  
+  if (type == "maxCamels") {
+    $("#skyspark-tweaks-camel-current").text(val);
+    onHrefChange();
+  }
+  else if (type == "maxHistory") {
+    $("#skyspark-tweaks-camel-current").text(val);
+    onHrefChange();
+  }
+}
+
 function addStyle(styleString) {
   const style = document.createElement('style');
   style.textContent = styleString;
@@ -8,11 +41,11 @@ function addStyle(styleString) {
 function camelSplitMax(str, maxCamels) {
   var strCamelSplit = str.replace(/([a-z0-9])([A-Z])/g, '$1 $2').split(' ');
   var text = ""
-  
+
   for (var i = 0; i < Math.min(strCamelSplit.length, maxCamels); i++) {
     text = text + strCamelSplit[i];
   }
-  
+
   return text;
 }
 
@@ -34,13 +67,10 @@ function stringToColor(str) {
 
 function normalizeColorBrightness(color) {
   var brightness = getColorBrightness(color)
-  var brightnessLimit = 255
-
-  if (brightness > brightnessLimit) {
-    var target = brightnessLimit / 765
-    var decrease = ((brightness / 765) - target) * (-100)
-    color = shadeColor(color, decrease)
-  }
+  var brightnessLimit = 255 + 30
+  var target = brightnessLimit / 765
+  var move = ((brightness / 765) - target) * (-100)
+  color = shadeColor(color, move)
 
   return color
 }

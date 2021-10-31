@@ -31,6 +31,8 @@
         "components/editor-func-colors.js",
         "components/editor-func-history.js",
         "components/button-side-switch.js",
+        "components/button-editor-settings.js",
+        "components/buttons.js",
         "content.js",
         "tools.js"
       ],

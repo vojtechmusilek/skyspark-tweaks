@@ -4,5 +4,15 @@ $("#btn").click(xxx)
 
 
 function xxx(){
-  alert(0);
+  
+  
+  
+  //console.log(window);
+  //console.log(sessionStorage.getItem(window.location.hash.replace("#", "")));
+  
+  res = "{left:{view:\"codeEditor\" state:{uri:`id:p:jednorazoveAnalyzy:r:290c9605-4bc6841b`}} right:N}";
+  
+  sessionStorage.setItem(window.location.hash.replace("#", ""), res);
+  window.location.href = window.location.href
+  
 }
