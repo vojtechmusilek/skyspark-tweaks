@@ -30,7 +30,7 @@ function _applyStyles() {
   var key = "skysparkTweaks.customCss";
   var css = localStorage.getItem(key);
   if (css == null) {
-    css = ".cm-property { color: #cf7900; }";
+    css = ".cm-property { color: #ce5b29;} .cm-keyword { color: #00f;} .cm-bracket { color: #f00; font-weight: bold}";
     localStorage.setItem(key, css);
   }
   addStyle(css);
