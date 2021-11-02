@@ -17,7 +17,6 @@ function getOption(type) {
     return getOption(type);
   }
   if (type == "maxHistory" || type == "maxCamels" || type == "settingsVisible") return parseInt(val);
-  //if (type == "settingsVisible") return val == "true" ? true : false;
   return val;
 }
 
@@ -43,6 +42,10 @@ function setOption(type, val) {
   }
   else if (type == "settingsVisible") {
     var src = $("#skyspark-tweaks-button-editor-settings").children().first().attr("src");
+    if(src == undefined) {
+      console.warn("could not update settings button icon");
+      return;
+    }
     src = val ? src.replace("s=outline", "s=solid") : src.replace("s=solid", "s=outline");
     $("#skyspark-tweaks-button-editor-settings").children().first().attr("src", src);
   }

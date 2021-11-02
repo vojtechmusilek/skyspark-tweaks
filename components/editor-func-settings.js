@@ -13,6 +13,7 @@ class EditorFuncSettings {
     if (alreadyCreated) return;
     if (getOption("settingsVisible") == 0) return;
     
+    // rewrite this using jquery?
     var classes = "domkit-control domkit-Label";
     var classesIn = "domkit-control domkit-control-button domkit-Button";
 

@@ -2,6 +2,7 @@ window.onload = function () {
   _oldHref = document.location.href;
   _editorFuncColors = new EditorFuncColors();
   _editorFuncHistory = new EditorFuncHistory();
+  _editorMatchDoEnd = new EditorMatchDoEnd();
   _buttonSideSwitch = new ButtonSideSwitch();
   _buttonEditorSettings = new ButtonEditorSettings();
   _editorFuncSettings = new EditorFuncSettings();
@@ -14,6 +15,9 @@ window.onload = function () {
   _checkPageLoadId = setInterval(_checkPageLoad, 100);
 }
 
+window.onclick = onChange;
+
+
 function onStart() {
   _buttons.onStart();
   _buttonSideSwitch.onStart();
@@ -24,6 +28,7 @@ function onChange() {
   _editorFuncColors.onChange();
   _editorFuncHistory.onChange();
   _editorFuncSettings.onChange();
+  _editorMatchDoEnd.onChange();
 }
 
 function _applyStyles() {
