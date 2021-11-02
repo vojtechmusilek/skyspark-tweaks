@@ -8,15 +8,15 @@ function getOption(type) {
     else if (type == "maxHistory") {
       setOption(type, 3);
     }
-    else if (type == "settingsVisible") {
-      setOption(type, 0);
+    else if (type == "showGroups") {
+      setOption(type, 1);
     }
     else {
       setOption(type, "undefined");
     }
     return getOption(type);
   }
-  if (type == "maxHistory" || type == "maxCamels" || type == "settingsVisible") return parseInt(val);
+  if (type == "maxHistory" || type == "maxCamels" || type == "showGroups") return parseInt(val);
   return val;
 }
 
@@ -27,12 +27,9 @@ function setOption(type, val) {
   localStorage.setItem(key, val);
 
   if (type == "maxCamels") {
-    $("#skyspark-tweaks-camel-current").text(val);
-
     EditorFuncColors.removeColors();
   }
   else if (type == "maxHistory") {
-    $("#skyspark-tweaks-history-current").text(val);
     var history = $(".skyspark-tweaks-func-history")
     for (let index = 0; index < history.length; index++) {
       if (index >= val) {
@@ -40,14 +37,8 @@ function setOption(type, val) {
       }
     }
   }
-  else if (type == "settingsVisible") {
-    var src = $("#skyspark-tweaks-button-editor-settings").children().first().attr("src");
-    if(src == undefined) {
-      console.warn("could not update settings button icon");
-      return;
-    }
-    src = val ? src.replace("s=outline", "s=solid") : src.replace("s=solid", "s=outline");
-    $("#skyspark-tweaks-button-editor-settings").children().first().attr("src", src);
+  else if (type == "showGroups") {
+    val == 0 ? EditorFuncColors.removeGroups() : EditorFuncColors.addGroups();
   }
 }
 

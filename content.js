@@ -5,7 +5,6 @@ window.onload = function () {
   _editorMatchDoEnd = new EditorMatchDoEnd();
   _buttonSideSwitch = new ButtonSideSwitch();
   _buttonEditorSettings = new ButtonEditorSettings();
-  _editorFuncSettings = new EditorFuncSettings();
   _buttons = new Buttons();
   _spamLock = false;
 
@@ -27,7 +26,6 @@ function onStart() {
 function onChange() {
   _editorFuncColors.onChange();
   _editorFuncHistory.onChange();
-  _editorFuncSettings.onChange();
   _editorMatchDoEnd.onChange();
 }
 

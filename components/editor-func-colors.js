@@ -7,7 +7,7 @@ class EditorFuncColors {
       this._applyColors(node.children);
     })
   }
-  
+
   _applyColors(nodes) {
     var maxCamels = getOption("maxCamels");
     var colorizedClassName = "skyspark-tweaks-colorized";
@@ -15,7 +15,7 @@ class EditorFuncColors {
 
     for (var node of nodes) {
       var spanElem = $(node).find("span").get(0);
-      if (spanElem.classList.contains(colorizedClassName)) continue;
+      if (spanElem.classList.contains(colorizedClassName)) break;
 
       var funcName = spanElem.innerHTML;
       var funcNameCamelSplitMax = camelSplitMax(funcName, maxCamels);
@@ -24,14 +24,8 @@ class EditorFuncColors {
       var funcNamePartColorized = funcName.substring(0, funcNameCamelSplitMax.length);
       var funcNamePartNormal = funcName.substring(funcNameCamelSplitMax.length);
 
-      // maybe make this an option?
-      //if(funcNamePartNormal == "") {
-      //  funcNamePartNormal = funcNamePartColorized;
-      //  funcNamePartColorized = ""
-      //}
-      
-      if (lastColor != null && lastColor != color) {
-        $(node).css("border-top", "1px dashed #e3e3e3");
+      if (getOption("showGroups") == 1 && lastColor != null && lastColor != color) {
+        $(node).css("border-top", "1px dashed #e3e3e3").css("padding-top", "2px");
       }
 
       spanElem.classList.add(colorizedClassName);
@@ -46,5 +40,13 @@ class EditorFuncColors {
       node.innerHTML = $(node).text();
       $(node).removeClass("skyspark-tweaks-colorized");
     })
+  }
+
+  static removeGroups() {
+    $(".domkit-Box .dom-style-autogen-0").children().css("border-top", "").css("padding-top", "3px");
+  }
+  
+  static addGroups() {
+    EditorFuncColors.removeColors();
   }
 }
