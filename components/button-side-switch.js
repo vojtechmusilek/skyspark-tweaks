@@ -2,7 +2,7 @@ class ButtonSideSwitch {
   onStart() {
     var imgSrc = "";
     $(".domkit-Box .ui-WsHeader").find("img").each((i, node) => {
-      if($(node).attr("src").includes("clone?")) imgSrc = $(node).attr("src").replace("clone?", "layout2h?");
+      if ($(node).attr("src").includes("clone?")) imgSrc = $(node).attr("src").replace("clone?", "layout2h?");
     });
     var id = "skyspark-tweaks-button-side-switch";
     var img = `<img class="ui-Icon" src="${imgSrc}" style="width: 16px; height: 16px;">`;
@@ -18,7 +18,7 @@ class ButtonSideSwitch {
     if (!hash) return;
     var data = sessionStorage.getItem(hash);
     var trimmed = data.substring(1, data.length - 1);
-
+    
     var hasNull = false;
     var obj = {};
     var stack = "";
@@ -26,35 +26,33 @@ class ButtonSideSwitch {
     var bracket = 0;
     for (let index = 0; index < trimmed.length; index++) {
       const char = trimmed[index];
-
+      
       if (char == "N" && stack == "" && bracket == 0) {
         obj[pointer] = char;
         stack = "";
         hasNull = true;
       }
-
+      
       if (char == ":" && bracket == 0) {
         pointer = stack.trim();
         stack = "";
-      }
-      else {
+      } else {
         stack += char;
       }
-
+      
       if (char == "{") bracket++;
       if (char == "}") bracket--;
-
+      
       if (char == "}" && bracket == 0) {
         obj[pointer] = stack;
         stack = "";
       }
     }
     var res = `{left:${obj.right} right:${obj.left}}`
-
+    
     if (hasNull) {
       //alert("Split view not opened")
-    }
-    else {
+    } else {
       sessionStorage.setItem(hash, res);
       window.location.href = window.location.href
     }

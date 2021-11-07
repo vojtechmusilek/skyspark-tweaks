@@ -1,5 +1,5 @@
 class Buttons {
-  onStart(){
+  onStart() {
     $(".domkit-Box .ui-WsHeader").children().each((index, parent) => {
       if (parent.style.cssText == "height: 34px; padding: 5px 10px 5px 5px;") {
         $(parent).children().each((index, node) => {

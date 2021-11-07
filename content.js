@@ -1,4 +1,4 @@
-window.onload = function () {
+window.onload = function() {
   _oldHref = document.location.href;
   _editorFuncColors = new EditorFuncColors();
   _editorFuncHistory = new EditorFuncHistory();
@@ -7,10 +7,10 @@ window.onload = function () {
   _buttonEditorSettings = new ButtonEditorSettings();
   _buttons = new Buttons();
   _spamLock = false;
-
+  
   _applyStyles();
   _startObeserver(onChange);
-
+  
   _checkPageLoadId = setInterval(_checkPageLoad, 100);
 }
 
@@ -49,12 +49,14 @@ function _checkPageLoad() {
 
 function _startObeserver(cbOnChange) {
   var bodyList = document.querySelector("body")
-  var observer = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
       if (!_spamLock) {
         cbOnChange()
         _spamLock = true;
-        setTimeout(() => { _spamLock = false; }, 100);
+        setTimeout(() => {
+          _spamLock = false;
+        }, 100);
       }
       
       if (_oldHref != document.location.href) {
@@ -63,12 +65,12 @@ function _startObeserver(cbOnChange) {
       }
     });
   });
-
+  
   var config = {
     childList: true,
     subtree: true,
     attributes: true
   };
-
+  
   observer.observe(bodyList, config);
 }
