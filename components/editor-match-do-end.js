@@ -7,7 +7,7 @@ class EditorMatchDoEnd {
   }
   
   _matchKeywords(parent) {
-    var cursor = $(".CodeMirror-cursor").get(0);
+    var cursor = $(parent).find(".CodeMirror-cursor").get(0);
     if (!cursor) return;
     
     var cursorPos = cursor.getBoundingClientRect();
