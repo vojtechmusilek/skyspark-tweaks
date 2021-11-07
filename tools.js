@@ -1,15 +1,17 @@
-function getOption(type) {
+function getOption(type, global = false) {
   var key = window.location.pathname.replace("/ui/", "skysparkTweaks.") + "." + type;
+  if (global) key = "skysparkTweaks." + type;
+  
   var val = localStorage.getItem(key);
   if (val == null) {
     if (type == "maxCamels") {
-      setOption(type, 1);
+      setOption(type, 1, global);
     } else if (type == "maxHistory") {
-      setOption(type, 3);
+      setOption(type, 3, global);
     } else if (type == "showGroups") {
-      setOption(type, 1);
+      setOption(type, 1, global);
     } else {
-      setOption(type, "undefined");
+      setOption(type, "", global);
     }
     return getOption(type);
   }
@@ -17,10 +19,12 @@ function getOption(type) {
   return val;
 }
 
-function setOption(type, val) {
+function setOption(type, val, global = false) {
   if (val < 0) return;
   
   var key = window.location.pathname.replace("/ui/", "skysparkTweaks.") + "." + type;
+  if (global) key = "skysparkTweaks." + type;
+  
   localStorage.setItem(key, val);
   
   if (type == "maxCamels") {
@@ -34,6 +38,8 @@ function setOption(type, val) {
     }
   } else if (type == "showGroups") {
     val == 0 ? EditorFuncColors.removeGroups() : EditorFuncColors.addGroups();
+  } else if (type == "favApps") {
+    HomeFavApps.reset();
   }
 }
 

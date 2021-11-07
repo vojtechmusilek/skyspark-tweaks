@@ -1,11 +1,16 @@
 window.onload = function() {
   _oldHref = document.location.href;
+  
+  _buttons = new Buttons();
+  _buttonSideSwitch = new ButtonSideSwitch();
+  _buttonEditorSettings = new ButtonEditorSettings();
+  
   _editorFuncColors = new EditorFuncColors();
   _editorFuncHistory = new EditorFuncHistory();
   _editorMatchDoEnd = new EditorMatchDoEnd();
-  _buttonSideSwitch = new ButtonSideSwitch();
-  _buttonEditorSettings = new ButtonEditorSettings();
-  _buttons = new Buttons();
+  
+  _homeFavApps = new HomeFavApps();
+  
   _spamLock = false;
   
   _applyStyles();
@@ -27,6 +32,8 @@ function onChange() {
   _editorFuncColors.onChange();
   _editorFuncHistory.onChange();
   _editorMatchDoEnd.onChange();
+  
+  _homeFavApps.onChange();
 }
 
 function _applyStyles() {
@@ -53,10 +60,10 @@ function _startObeserver(cbOnChange) {
     mutations.forEach(function(mutation) {
       if (!_spamLock) {
         cbOnChange()
-        _spamLock = true;
-        setTimeout(() => {
-          _spamLock = false;
-        }, 100);
+        //_spamLock = true;
+        //setTimeout(() => {
+        //  _spamLock = false;
+        //}, 100);
       }
       
       if (_oldHref != document.location.href) {

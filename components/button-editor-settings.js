@@ -5,8 +5,6 @@ class ButtonEditorSettings {
       if ($(node).attr("src").includes("clone?")) imgSrc = $(node).attr("src").replace("clone?", "command?");
     });
     
-    if (getOption("settingsVisible") == false) imgSrc = imgSrc.replace("s=solid", "s=outline");
-    
     var id = "skyspark-tweaks-button-editor-settings";
     var img = `<img class="ui-Icon" src="${imgSrc}" style="width: 16px; height: 16px;">`;
     var button = `<div id="${id}" class="domkit-control domkit-control-button domkit-Button" tabindex="0" style="padding: 3px 9px; float: right;">${img}</div>`;
@@ -16,12 +14,6 @@ class ButtonEditorSettings {
   }
   
   _click() {
-    //var visible = getOption("settingsVisible");
-    //setOption("settingsVisible", visible == 0 ? 1 : 0);
-    //if(visible == true){
-    //  $("#skyspark-tweaks-settings").remove();
-    //}
-    
     $("body").append($(ButtonEditorSettings._settingsDialog))
     
     $("#skyspark-tweaks-settings").on('click', function(e) {
@@ -59,10 +51,15 @@ class ButtonEditorSettings {
       var val = $(this).prop('checked');
       setOption("showGroups", val ? 1 : 0);
     });
+    $("#skyspark-tweaks-option-fav-apps").on("input", function() {
+      var val = $(this).val();
+      setOption("favApps", val, true);
+    });
     
     $("#skyspark-tweaks-option-camel").val(getOption("maxCamels"));
     $("#skyspark-tweaks-option-history").val(getOption("maxHistory"));
     $("#skyspark-tweaks-option-groups").prop('checked', getOption("showGroups") == 1);
+    $("#skyspark-tweaks-option-fav-apps").val(getOption("favApps", true));
     
     setTimeout(() => {
       $("#skyspark-tweaks-settings").css("opacity", 1);
@@ -110,13 +107,15 @@ class ButtonEditorSettings {
                 <td style="padding: 4px; width: 100px;"><input id="skyspark-tweaks-option-groups" type="checkbox" class="domkit-Checkbox"
                     style="display: inline-block;"></td>
               </tr>
-              <!--tr>
+              <tr>
                 <td style="padding: 4px; white-space: nowrap;"><span
                     class="domkit-control domkit-Label domkit-noselect popup"
-                    style="cursor: default; user-select: none;">xxx</span></td>
-                <td style="padding: 4px; width: 500px;"><input type="checkbox" class="domkit-Checkbox"
-                    style="display: inline-block;"></td>
-              </tr-->
+                    style="cursor: default; user-select: none;">Fav Apps</span></td>
+                <td style="padding: 4px; width: 300px;">
+                  <div class="ui-Input"><input id="skyspark-tweaks-option-fav-apps" placeholder="Builder,Historian" type="text" class="domkit-control domkit-control-text domkit-TextField"
+                      style="width: 100%;"></div>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
