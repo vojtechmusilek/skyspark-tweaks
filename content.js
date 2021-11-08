@@ -1,6 +1,4 @@
 window.onload = function() {
-  _oldHref = document.location.href;
-  
   _buttons = new Buttons();
   _buttonSideSwitch = new ButtonSideSwitch();
   _buttonEditorSettings = new ButtonEditorSettings();
@@ -11,12 +9,10 @@ window.onload = function() {
   
   _homeFavApps = new HomeFavApps();
   
-  _spamLock = false;
-  
   _applyStyles();
   _startObeserver(onChange);
   
-  _checkPageLoadId = setInterval(_checkPageLoad, 100);
+  _checkStartId = setInterval(_checkStart, 10);
 }
 
 window.onclick = onChange;
@@ -26,13 +22,13 @@ function onStart() {
   _buttons.onStart();
   _buttonSideSwitch.onStart();
   _buttonEditorSettings.onStart();
+  console.log("SkySpark Tweaks started");
 }
 
 function onChange() {
   _editorFuncColors.onChange();
   _editorFuncHistory.onChange();
   _editorMatchDoEnd.onChange();
-  
   _homeFavApps.onChange();
 }
 
@@ -46,37 +42,23 @@ function _applyStyles() {
   addStyle(css);
 }
 
-function _checkPageLoad() {
-  if ($(".domkit-Box").length > 1) {
-    clearInterval(_checkPageLoadId);
-    onChange();
+function _checkStart() {
+  if ($('img[src="/ui/x/24daeae5-9feb24af/icon/clone?s=solid&c=fff"]').length >= 1) {
+    clearInterval(_checkStartId);
     onStart();
   }
 }
 
 function _startObeserver(cbOnChange) {
-  var bodyList = document.querySelector("body")
+  var bodyList = document.querySelector("body");
+  
   var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (!_spamLock) {
-        cbOnChange()
-        //_spamLock = true;
-        //setTimeout(() => {
-        //  _spamLock = false;
-        //}, 100);
-      }
-      
-      if (_oldHref != document.location.href) {
-        _oldHref = document.location.href;
-        cbOnChange();
-      }
-    });
+    cbOnChange();
   });
   
   var config = {
     childList: true,
-    subtree: true,
-    attributes: true
+    subtree: true
   };
   
   observer.observe(bodyList, config);
