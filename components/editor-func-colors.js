@@ -4,6 +4,12 @@ class EditorFuncColors {
       var cl = $(node).parent().parent().attr('class');
       if (cl != "domkit-Box") return;
       
+      if (getOption("maxHistory") == 0) {
+        $(node).css("border-bottom", "1px solid #ccc")
+      } else {
+        $(node).css("border-bottom", "3px solid #ccc")
+      }
+      
       this._applyColors(node.children);
     })
   }
