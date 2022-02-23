@@ -51,10 +51,10 @@ class ButtonSideSwitch {
     var res = `{left:${obj.right} right:${obj.left}}`
     
     if (hasNull) {
-      //alert("Split view not opened")
+      stLog("cannot switch sides, only 1 view is opened");
     } else {
       sessionStorage.setItem(hash, res);
-      window.location.href = window.location.href
+      window.location.href = window.location.href;
     }
   }
 }
