@@ -22,7 +22,7 @@ function onStart() {
   _buttons.onStart();
   _buttonSideSwitch.onStart();
   _buttonEditorSettings.onStart();
-  console.log("SkySpark Tweaks started");
+  stLog("started");
 }
 
 function onChange() {
@@ -43,7 +43,7 @@ function _applyStyles() {
 }
 
 function _checkStart() {
-  if ($('img[src="/ui/x/24daeae5-9feb24af/icon/clone?s=solid&c=fff"]').length >= 1) {
+  if ($('img[src^="/ui/x/"]').length >= 1) {
     clearInterval(_checkStartId);
     onStart();
   }

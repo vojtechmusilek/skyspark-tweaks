@@ -72,8 +72,12 @@ function addStyle(styleString) {
   document.head.append(style);
 }
 
+function camelSplit(str) {
+  return str.replace(/([a-z0-9])([A-Z])/g, '$1 $2').split(' ');
+}
+
 function camelSplitMax(str, maxCamels) {
-  var strCamelSplit = str.replace(/([a-z0-9])([A-Z])/g, '$1 $2').split(' ');
+  var strCamelSplit = camelSplit(str);
   var text = ""
   
   for (var i = 0; i < Math.min(strCamelSplit.length, maxCamels); i++) {
@@ -86,6 +90,7 @@ function camelSplitMax(str, maxCamels) {
 function stringToColor(str) {
   var hash = 0;
   for (var i = 0; i < str.length; i++) {
+    if (str[i] == "_") continue;
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
   }
   var color = '#';
@@ -139,4 +144,8 @@ function shadeColor(color, percent) {
   var BB = ((B.toString(16).length == 1) ? "0" + B.toString(16) : B.toString(16));
   
   return "#" + RR + GG + BB;
+}
+
+function stLog(message) {
+  console.log("[Skyspark Tweaks]: " + message)
 }
