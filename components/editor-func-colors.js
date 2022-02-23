@@ -10,13 +10,66 @@ class EditorFuncColors {
         $(node).css("border-bottom", "3px solid #ccc")
       }
       
-      this._applyColors(node.children);
+      var colorizedClassName = "skyspark-tweaks-colorized";
+      
+      if (node.children.length > 0) {
+        this._applyColorsSmart(node.children, colorizedClassName);
+        //this._applyColors(node.children, colorizedClassName);
+      }
     })
   }
   
-  _applyColors(nodes) {
+  _applyColorsSmart(nodes, colorizedClassName) {
     var maxCamels = getOption("maxCamels");
-    var colorizedClassName = "skyspark-tweaks-colorized";
+    var lastColor = null;
+    
+    var breaked = false;
+    var camels = [];
+    var camelsMaxParts = 0;
+    
+    for (var node of nodes) {
+      var spanElem = $(node).find("span").get(0);
+      if (spanElem.classList.contains(colorizedClassName)) {
+        breaked = true;
+        break;
+      }
+      var funcName = spanElem.innerHTML;
+      var parts = camelSplit(funcName);
+      camelsMaxParts = Math.max(camelsMaxParts, parts.length);
+      camels.push(parts);
+    }
+    if (breaked) return;
+    
+    var dbg_concats = [];
+    
+    var partIndex = camelsMaxParts - 1;
+    while (partIndex > 0) {
+      for (var camel of camels) {
+        var currentIndex = 0;
+        var concat = "";
+        
+        while (currentIndex < partIndex) {
+          if (currentIndex >= camel.length || camel.length < partIndex) break;
+          concat += camel[currentIndex];
+          currentIndex++
+        }
+        
+        if (concat !== "") {
+          dbg_concats.push({
+            partIndex,
+            concat,
+            lastPart: camel[currentIndex - 1]
+          });
+        }
+      }
+      partIndex--;
+    }
+    
+    var xxx = 0;
+  }
+  
+  _applyColors(nodes, colorizedClassName) {
+    var maxCamels = getOption("maxCamels");
     var lastColor = null;
     
     for (var node of nodes) {
@@ -25,6 +78,10 @@ class EditorFuncColors {
       
       var funcName = spanElem.innerHTML;
       var funcNameCamelSplitMax = camelSplitMax(funcName, maxCamels);
+      
+      // todo - toto bude nastavitelne
+      if (funcNameCamelSplitMax == funcName) funcNameCamelSplitMax = "";
+      
       var color = stringToColor(funcNameCamelSplitMax);
       var style = "color:" + color + "; font-weight:500;"
       var funcNamePartColorized = funcName.substring(0, funcNameCamelSplitMax.length);
