@@ -13,8 +13,11 @@ class EditorFuncColors {
       var colorizedClassName = "skyspark-tweaks-colorized";
       
       if (node.children.length > 0) {
-        //this._applyColorsSmart(node.children, colorizedClassName);
-        this._applyColors(node.children, colorizedClassName);
+        if (localStorage.getItem("skysparkTweaks.experimental") == "yes") {
+          this._applyColorsSmart(node.children, colorizedClassName);
+        } else {
+          this._applyColors(node.children, colorizedClassName);
+        }
       }
     })
   }
