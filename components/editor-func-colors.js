@@ -19,9 +19,9 @@ class EditorFuncColors {
     })
   }
   
-  static colorIndex = 0;
+  static colorIndex = {};
   static colorDict = {};
-
+  
   _applyColorsSmart(nodes, colorizedClassName) {
     var maxCamels = getOption("maxCamels");
     var lastColor = null;
@@ -37,9 +37,13 @@ class EditorFuncColors {
         break;
       }
       var funcName = spanElem.innerHTML;
+      
+      //TEST
+      
+      
       var parts = camelSplit(funcName);
       camelsMaxParts = Math.max(camelsMaxParts, parts.length);
-      camels.push({parts, elem: spanElem});
+      camels.push({ parts, elem: spanElem });
     }
     if (breaked) return;
     
@@ -73,28 +77,35 @@ class EditorFuncColors {
     var filtered = new Map([...grouped].filter(([k, v]) => v.length > 1));
     var filteredVals = Array.from(filtered.values()).flat();
     var groupedElems = groupBy(filteredVals, x => x.elem);
-
+    
     for (const [key, values] of groupedElems.entries()) {
       var innerText = key.innerText;
       var remain = innerText;
-
+      
       var res = "";
-
+      
+      //var color = "";
+      var camelkeep = 1;
+      
       for (const value of values) {
         var lio = remain.lastIndexOf(value.lastPart);
         
         var left = remain.substring(0, lio);
         var center = remain.substring(lio, lio + value.lastPart.length);
         var right = remain.substring(lio + value.lastPart.length, remain.length);
-
+        
+        //if (color == "" || value.partIndex <= camelkeep) {
         // var 1
-        //var color = stringToColor(center);
+        var colorKey = center.toLowerCase();
+        var color = stringToColor(colorKey);
         // var 2
-        var color = stringToColorFromList(center);
-
+        //color = stringToColorFromList(value.concat, value.partIndex); //Math.min(value.partIndex, camelkeep + 1));
+        //color = stringToColorFromList2(center);
+        //}
+        
         var style = "color:" + color + "; font-weight:500;"
         var html = '<span style="' + style + '">' + center + '</span>';
-
+        
         res = html + res;
         remain = left + right;
       }

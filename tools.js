@@ -105,7 +105,7 @@ function stringToColor(str) {
 }
 
 
-function stringToColorFromList(str) {
+function stringToColorFromList(str, level) {
   list = [
     "#3498db",
     "#e74c3c",
@@ -118,20 +118,64 @@ function stringToColorFromList(str) {
     "#e67e22"
   ];
   
-  if (EditorFuncColors.colorDict[str] !== undefined) {
-    return EditorFuncColors.colorDict[str];
+  if (EditorFuncColors.colorIndex[level] === undefined) {
+    EditorFuncColors.colorIndex[level] = 0;
   }
-
-  if (EditorFuncColors.colorIndex > list.length - 1) EditorFuncColors.colorIndex = 0;
-  const color = list[EditorFuncColors.colorIndex++];
   
-  EditorFuncColors.colorDict[str] = color;
+  if (EditorFuncColors.colorDict[level] !== undefined && EditorFuncColors.colorDict[level][str] !== undefined) {
+    return EditorFuncColors.colorDict[level][str];
+  }
+  
+  if (EditorFuncColors.colorIndex[level] > list.length - 1) EditorFuncColors.colorIndex[level] = 0;
+  const color = list[EditorFuncColors.colorIndex[level]++];
+  
+  if (EditorFuncColors.colorDict[level] === undefined) {
+    EditorFuncColors.colorDict[level] = {};
+  }
+  
+  EditorFuncColors.colorDict[level][str] = color;
   return color;
+}
+
+function stringToColorFromList2(str) {
+  list = [
+    "#3498db",
+    "#e74c3c",
+    "#27ae60",
+    "#9b59b6",
+    "#f39c12",
+    "#16a085",
+    "#2980b9",
+    "#c0392b",
+    "#e67e22"
+  ];
+  
+  var hash = 0;
+  for (var i = 0; i < str.length; i++) {
+    if (str[i] == "_") continue;
+    //hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    hash += Math.pow(str.charCodeAt(i), 3);
+  }
+  
+  hash = Math.abs(hash);
+  
+  while (hash > 1) {
+    hash /= 2;
+  }
+  
+  var scaled = getScaledValue(hash, 0, 1, 0, list.length);
+  
+  console.log({ str, color: list[Math.round(scaled)], hash, scaled });
+  
+  return list[Math.round(scaled)];
 }
 
 function normalizeColorBrightness(color) {
   var brightness = getColorBrightness(color);
-  var brightnessLimit = 255 + 30;
+  
+  console.log({ brightness });
+  
+  var brightnessLimit = 255 + -60;
   var target = brightnessLimit / 765;
   var move = ((brightness / 765) - target) * (-100);
   color = shadeColor(color, move);
@@ -178,13 +222,19 @@ function stLog(message) {
 function groupBy(list, keyGetter) {
   const map = new Map();
   list.forEach((item) => {
-       const key = keyGetter(item);
-       const collection = map.get(key);
-       if (!collection) {
-           map.set(key, [item]);
-       } else {
-           collection.push(item);
-       }
+    const key = keyGetter(item);
+    const collection = map.get(key);
+    if (!collection) {
+      map.set(key, [item]);
+    } else {
+      collection.push(item);
+    }
   });
   return map;
+}
+
+function getScaledValue(value, sourceRangeMin, sourceRangeMax, targetRangeMin, targetRangeMax) {
+  var targetRange = targetRangeMax - targetRangeMin;
+  var sourceRange = sourceRangeMax - sourceRangeMin;
+  return (value - sourceRangeMin) * targetRange / sourceRange + targetRangeMin;
 }
