@@ -51,6 +51,7 @@ function setOption(type, val, global = false) {
   
   if (type == "maxCamels") {
     EditorFuncColors.removeColors();
+    EditorFuncColors.removeGroups();
   } else if (type == "maxHistory") {
     var history = $(".skyspark-tweaks-func-history")
     for (let index = 0; index < history.length; index++) {
