@@ -104,14 +104,39 @@ function stringToColor(str) {
   return color;
 }
 
-function normalizeColorBrightness(color) {
-  var brightness = getColorBrightness(color)
-  var brightnessLimit = 255 + 30
-  var target = brightnessLimit / 765
-  var move = ((brightness / 765) - target) * (-100)
-  color = shadeColor(color, move)
+
+function stringToColorFromList(str) {
+  list = [
+    "#3498db",
+    "#e74c3c",
+    "#27ae60",
+    "#9b59b6",
+    "#f39c12",
+    "#16a085",
+    "#2980b9",
+    "#c0392b",
+    "#e67e22"
+  ];
   
-  return color
+  if (EditorFuncColors.colorDict[str] !== undefined) {
+    return EditorFuncColors.colorDict[str];
+  }
+
+  if (EditorFuncColors.colorIndex > list.length - 1) EditorFuncColors.colorIndex = 0;
+  const color = list[EditorFuncColors.colorIndex++];
+  
+  EditorFuncColors.colorDict[str] = color;
+  return color;
+}
+
+function normalizeColorBrightness(color) {
+  var brightness = getColorBrightness(color);
+  var brightnessLimit = 255 + 30;
+  var target = brightnessLimit / 765;
+  var move = ((brightness / 765) - target) * (-100);
+  color = shadeColor(color, move);
+  
+  return color;
 }
 
 function getColorBrightness(color) {
@@ -148,4 +173,18 @@ function shadeColor(color, percent) {
 
 function stLog(message) {
   console.log("[Skyspark Tweaks]: " + message)
+}
+
+function groupBy(list, keyGetter) {
+  const map = new Map();
+  list.forEach((item) => {
+       const key = keyGetter(item);
+       const collection = map.get(key);
+       if (!collection) {
+           map.set(key, [item]);
+       } else {
+           collection.push(item);
+       }
+  });
+  return map;
 }
