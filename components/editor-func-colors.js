@@ -41,9 +41,6 @@ class EditorFuncColors {
       }
       var funcName = spanElem.innerHTML;
       
-      //TEST
-      
-      
       var parts = camelSplit(funcName);
       camelsMaxParts = Math.max(camelsMaxParts, parts.length);
       camels.push({ parts, elem: spanElem });
@@ -90,6 +87,7 @@ class EditorFuncColors {
       //var color = "";
       var camelkeep = 1;
       
+      // todo - try start at lvl 1 - merge colors at lvl 2 with lvl 1, merge colors of lvl 3 with lvl2
       for (const value of values) {
         var lio = remain.lastIndexOf(value.lastPart);
         
@@ -130,9 +128,14 @@ class EditorFuncColors {
       var funcName = spanElem.innerHTML;
       var funcNameCamelSplitMax = camelSplitMax(funcName, maxCamels);
       
-      // todo - toto bude nastavitelne
-      if (funcNameCamelSplitMax == funcName) funcNameCamelSplitMax = "";
-      
+      // if camels set to 2 and only camel 1 if found, this will color it as camel 1
+      // todo - settings for this?
+      var curCamels = maxCamels - 1;
+      while (funcNameCamelSplitMax == funcName && curCamels > 0) {
+        funcNameCamelSplitMax = camelSplitMax(funcName, curCamels);
+        curCamels -= 1;
+      }
+
       var color = stringToColor(funcNameCamelSplitMax);
       var style = "color:" + color + "; font-weight:500;"
       var funcNamePartColorized = funcName.substring(0, funcNameCamelSplitMax.length);
