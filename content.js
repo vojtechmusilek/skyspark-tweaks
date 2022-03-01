@@ -6,7 +6,8 @@ window.onload = function() {
   _editorFuncColors = new EditorFuncColors();
   _editorFuncHistory = new EditorFuncHistory();
   _editorMatchDoEnd = new EditorMatchDoEnd();
-  
+  _splitViewPercentage = new SplitViewPercentage();
+
   _homeFavApps = new HomeFavApps();
   
   _applyStyles();
@@ -17,11 +18,11 @@ window.onload = function() {
 
 window.onclick = onChange;
 
-
 function onStart() {
   _buttons.onStart();
   _buttonSideSwitch.onStart();
   _buttonEditorSettings.onStart();
+  _listenKeys();
   stLog("started");
 }
 
@@ -30,6 +31,7 @@ function onChange() {
   _editorFuncHistory.onChange();
   _editorMatchDoEnd.onChange();
   _homeFavApps.onChange();
+  _splitViewPercentage.onChange();
 }
 
 function _applyStyles() {
@@ -62,4 +64,25 @@ function _startObeserver(cbOnChange) {
   };
   
   observer.observe(bodyList, config);
+}
+
+function _listenKeys() {
+  keysPressed = {};
+  
+  document.addEventListener('keydown', (event) => {
+    const key = event.key.toLowerCase();
+    keysPressed[key] = true;
+    
+    if (keysPressed['control'] && keysPressed['shift'] && key == 'k') {
+      _splitViewPercentage.onKey(-10);
+    }
+    else
+    if (keysPressed['control'] && keysPressed['shift'] && key == 'l') {
+      _splitViewPercentage.onKey(10);
+    }
+ });
+ 
+ document.addEventListener('keyup', (event) => {
+    delete keysPressed[event.key.toLowerCase()];
+ });
 }
