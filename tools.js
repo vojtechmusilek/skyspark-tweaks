@@ -166,16 +166,11 @@ function stringToColorFromList2(str) {
   
   var scaled = getScaledValue(hash, 0, 1, 0, list.length);
   
-  console.log({ str, color: list[Math.round(scaled)], hash, scaled });
-  
   return list[Math.round(scaled)];
 }
 
 function normalizeColorBrightness(color) {
   var brightness = getColorBrightness(color);
-  
-  console.log({ brightness });
-  
   var brightnessLimit = 255 + -60;
   var target = brightnessLimit / 765;
   var move = ((brightness / 765) - target) * (-100);
