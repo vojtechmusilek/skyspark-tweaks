@@ -1,5 +1,4 @@
-Chrome extension that adds
-multiple small changes for better user experience in SkySpark.
+Multiple small changes for better user experience in SkySpark.
 
  **Features**
 - Split View Sides Switch - when split view open, it switches sides (left to right and right to left)
@@ -13,6 +12,3 @@ multiple small changes for better user experience in SkySpark.
 - Coloring - camelCase coloring option (0 = no coloring)
 - Func History - amount of function names shown in history (0 = no history)
 - Func groups - shows lines between same colored functions
-
-**Chrome extension link**
-https://chrome.google.com/webstore/detail/skyspark-tweaks/fmnjecnenifhlmejcloiigeplkkknnio
