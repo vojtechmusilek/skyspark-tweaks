@@ -16,8 +16,9 @@
       "components/button-side-switch.js",
       "components/button-editor-settings.js",
       "components/buttons.js",
-      "components/home-fav-apps.js",
       "components/splitview-percentage.js",
+      "components/home-fav-apps.js",
+      "components/home-projects.js",
       "content.js",
       "tools.js"
     ],

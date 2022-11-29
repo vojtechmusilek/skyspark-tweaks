@@ -9,6 +9,7 @@ window.onload = function() {
   _splitViewPercentage = new SplitViewPercentage();
 
   _homeFavApps = new HomeFavApps();
+  _homeProjects = new HomeProjects();
   
   _applyStyles();
   _startObeserver(onChange);
@@ -30,8 +31,9 @@ function onChange() {
   _editorFuncColors.onChange();
   _editorFuncHistory.onChange();
   _editorMatchDoEnd.onChange();
-  _homeFavApps.onChange();
   _splitViewPercentage.onChange();
+  _homeFavApps.onChange();
+  _homeProjects.onChange();
 }
 
 function _applyStyles() {
@@ -73,6 +75,8 @@ function _listenKeys() {
     const key = event.key.toLowerCase();
     keysPressed[key] = true;
     
+    _homeProjects.onKeyDown(key);
+
     if (keysPressed['control'] && keysPressed['shift'] && key == 'k') {
       _splitViewPercentage.onKey(-10);
     }

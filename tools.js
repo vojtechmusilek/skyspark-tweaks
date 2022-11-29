@@ -234,3 +234,7 @@ function getScaledValue(value, sourceRangeMin, sourceRangeMax, targetRangeMin, t
   var sourceRange = sourceRangeMax - sourceRangeMin;
   return (value - sourceRangeMin) * targetRange / sourceRange + targetRangeMin;
 }
+
+function elemExists(elem) {
+  return document.documentElement.contains(elem)
+}
