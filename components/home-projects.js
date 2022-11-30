@@ -14,12 +14,34 @@ class HomeProjects {
   }
   
   onKeyDown(key) {
-    if (key == "enter") {
-      if (this.btn) {
-        $(this.btn).mousedown().mouseup();
-      }
-      return;
+    if (key == "enter" && this.btn) {
+      this.btn.dispatchEvent(new Event('mousedown'));
+      this.btn.dispatchEvent(new Event('mouseup'));
     }
+    //else if (key == "arrowdown" && this.projs) {
+    //  let selNext = false;
+    //  
+    //  this.projs.each((_, node) => {
+    //    let isHidden = $(node).is(":hidden");
+    //    let isSelected = $(node).hasClass("selected");
+    //
+    //    console.log({node, isHidden, isSelected, selNext});
+    //
+    //    if (selNext && !isHidden) {
+    //      $(node).addClass("selected");
+    //      selNext = false;
+    //    }
+    //    else if (isHidden && isSelected) {
+    //      $(node).hide().removeClass("selected");
+    //      selNext = true;
+    //    }
+    //
+    //    
+    //  });
+    //}
+    //else if (key == "arrowup" && this.projs) {
+    //  
+    //}
   }
 
   _searchPopup() {
@@ -86,76 +108,40 @@ class HomeProjects {
 
     let firstSelected = false;
 
+    console.log("---", filter);
+
+
+
     projs.each((_, node) => {
       let projName = $(node).find("span").text().toLowerCase();
-      
       let show = re.test(projName);
-      //let show = projName.includes(filter);
 
       if (show) {
+        $(node).show();
         if (!firstSelected) {
           firstSelected = true;
           $(node).addClass("selected");
           $(node).click();
         }
-        $(node).show();
       }
-      else {
-        $(node).removeClass("selected");
-        $(node).hide();
+    });
+
+    projs.each((_, node) => {
+      let projName = $(node).find("span").text().toLowerCase();
+      let show = re.test(projName);
+
+      if (!show) {
+        $(node).removeClass("selected").hide();
       }
     });
   }
 
   _focus(input) {
     this._times++;
-    if (this._times > 10) {
+    if (this._times > 20) {
       clearInterval(this._sender);
     }
 
     $(input).focus();
   }
-
-
-
-/*
-  _autosearch2() {
-    let foundNodes = $("." + HomeProjects.className);
-    if (foundNodes.length != 1) return;
-    
-    console.log("lookin");
-    $(".domkit-Popup * .ui-UiPimTree-node").each((index, node) => {
-      console.log(node);
-    })
-    
-
-  }
-
-  _autosearch() {
-    let foundNodes = $("." + HomeProjects.className);
-    if (foundNodes.length != 1) return;
-    
-    const ke = new KeyboardEvent('keydown', {
-      bubbles: true,
-      cancelable: true,
-      keyCode: 13,
-      key: "Enter",
-    });
-
-    foundNodes.get(0).dispatchEvent(ke);
-  }
-
-  _autofocus() {
-    $(".domkit-Popup > div > div:nth-child(1) > input").each((index, node) => {
-      var alreadyMoved = $(node).hasClass(HomeProjects.className)
-      if (alreadyMoved) return;
-
-      $(node).addClass(HomeProjects.className);
-      
-      this._times = 0;
-      this._sender = setInterval(() => this._focus(node), 50);
-    })
-  }
-*/
-  
 }
