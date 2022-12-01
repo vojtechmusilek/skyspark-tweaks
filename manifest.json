@@ -13,6 +13,7 @@
       "components/editor-func-colors.js",
       "components/editor-func-history.js",
       "components/editor-match-do-end.js",
+      "components/editor-keep-search.js",
       "components/button-side-switch.js",
       "components/buttons.js",
       "components/splitview-percentage.js",

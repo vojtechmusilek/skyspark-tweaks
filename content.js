@@ -5,6 +5,7 @@ window.onload = function() {
   _editorFuncColors = new EditorFuncColors();
   _editorFuncHistory = new EditorFuncHistory();
   _editorMatchDoEnd = new EditorMatchDoEnd();
+  _editorKeepSearch = new EditorKeepSearch();
   _splitViewPercentage = new SplitViewPercentage();
 
   _homeFavApps = new HomeFavApps();
@@ -23,6 +24,7 @@ function onStart() {
   _buttonSideSwitch.onStart();
 
   new Settings().onStart();
+  new EditorKeepSearch().onStart();
 
   _listenKeys();
   stLog("started");
