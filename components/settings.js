@@ -3,8 +3,6 @@ class Settings {
   
   onStart() {
     this._makeButton();
-
-
   }
 
   _makeButton() {
@@ -60,28 +58,28 @@ class Settings {
       var val = $(this).val();
       if (val == "") return;
       setOption("maxCamels", val);
-    }).val(getOption("maxCamels"));
+    }).val(getOptionNum("maxCamels",  1));
 
     $(editorFuncHis).on("input", function() {
       var val = $(this).val();
       if (val == "") return;
       setOption("maxHistory", val, true);
-    }).val(getOption("maxHistory", true));
+    }).val(getOptionNum("maxHistory", 3));
 
     $(editorFuncGroups).change(function() {
       var val = $(this).prop('checked');
-      setOption("showGroups", val ? 1 : 0);
-    }).prop('checked', getOption("showGroups") == 1);
+      setOption("showGroups", val);
+    }).prop('checked', getOptionBool("showGroups", true));
 
     $(favApps).on("input", function() {
       var val = $(this).val();
       setOption("favApps", val, true);
-    }).val(getOption("favApps", true));;
+    }).val(getOption("favApps", ""));
 
     $(homeProjects).change(function() {
       var val = $(this).prop('checked');
-      setOption("fastHomeProjs", val ? 1 : 0, true);
-    }).prop('checked', getOption("fastHomeProjs", true) == 1);
+      setOption("fastHomeProjs", val, true);
+    }).prop('checked', getOptionBool("fastHomeProjs", false));
   }
 
   _configureDialogButtons() {
@@ -129,7 +127,13 @@ class Settings {
     
     $("#skyspark-tweaks-dialog-rows").append(elem);
     
-    return $("#" + id);
+    let elemKid = $("#" + id);
+
+    if (type == "str") {
+      $(elemKid).unbind("keydown");
+    }
+
+    return elemKid
   }
 
   static settingsDialogNum = `
@@ -166,7 +170,6 @@ class Settings {
 </tr>
   `
 
-
   static settingsDialog = `
 <div id="skyspark-tweaks-settings" tabindex="0" class="domkit-Dialog-mask"
   style="opacity: 0; transition-duration: 100ms; transition-property: opacity;">
@@ -193,5 +196,5 @@ class Settings {
     </div>
   </div>
 </div>
-`
+  `
 }

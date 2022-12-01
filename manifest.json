@@ -14,7 +14,6 @@
       "components/editor-func-history.js",
       "components/editor-match-do-end.js",
       "components/button-side-switch.js",
-      "components/button-editor-settings.js",
       "components/buttons.js",
       "components/splitview-percentage.js",
       "components/home-fav-apps.js",

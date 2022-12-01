@@ -5,7 +5,7 @@ class EditorFuncColors {
       if (cl != "domkit-Box") return;
       if ($(node).hasClass("ui-WsViewMenu-faux")) return;
       
-      if (getOption("maxHistory") == 0) {
+      if (getOptionNum("maxHistory", 3) == 0) {
         $(node).css("border-bottom", "1px solid #ccc")
       } else {
         $(node).css("border-bottom", "3px solid #ccc")
@@ -27,7 +27,7 @@ class EditorFuncColors {
   static colorDict = {};
   
   _applyColorsSmart(nodes, colorizedClassName) {
-    var maxCamels = getOption("maxCamels");
+    var maxCamels = getOptionNum("maxCamels", 1);
     var lastColor = null;
     
     var breaked = false;
@@ -119,7 +119,7 @@ class EditorFuncColors {
   }
   
   _applyColors(nodes, colorizedClassName) {
-    var maxCamels = getOption("maxCamels");
+    var maxCamels = getOptionNum("maxCamels", 1);
     var lastColor = null;
     
     for (var node of nodes) {
@@ -142,7 +142,7 @@ class EditorFuncColors {
       var funcNamePartColorized = funcName.substring(0, funcNameCamelSplitMax.length);
       var funcNamePartNormal = funcName.substring(funcNameCamelSplitMax.length);
       
-      if (getOption("showGroups") == 1 && lastColor != null && lastColor != color) {
+      if (getOptionBool("showGroups", true) && lastColor != null && lastColor != color) {
         $(node).css("border-top", "1px dashed #e3e3e3").css("padding-top", "2px");
       }
       

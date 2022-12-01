@@ -10,7 +10,7 @@ class HomeProjects {
       this._fixMenuItems();
     }
 
-    if (getOption("fastHomeProjs", true) == 0) return;
+    if (getOptionBool("fastHomeProjs", false)) return;
 
     if (this.pop) {
       this._searchButtonOk();
@@ -103,8 +103,7 @@ class HomeProjects {
         node: node
       });
     });
-
-    console.log({projsCache});
+    
     this.projsCache = projsCache;
     this.projsCacheParent = projsCacheParent;
     this.projsParent = projsParent;

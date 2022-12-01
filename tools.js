@@ -20,34 +20,42 @@ function doOverlap(domRect1, domRect2, margin = 2) {
   return true;
 }
 
-function getOption(type, global = false) {
-  var key = window.location.pathname.replace("/ui/", "skysparkTweaks.") + "." + type;
-  if (global) key = "skysparkTweaks." + type;
+function getOptionNum(type, defVal) {
+  return parseInt(getOption(type, defVal));
+}
+
+function getOptionBool(type, defVal) {
+  return getOptionNum(type, defVal) == 1
+}
+
+function getOption(type, defVal) {
+  //var key = window.location.pathname.replace("/ui/", "skysparkTweaks.") + "." + type;
+  //var val = localStorage.getItem(key);
   
-  var val = localStorage.getItem(key);
+  //if (val == null) {
+  key = "skysparkTweaks." + type;
+  val = localStorage.getItem(key);
+  //}
+  
   if (val == null) {
-    if (type == "maxCamels") {
-      setOption(type, 1, global);
-    } else if (type == "maxHistory") {
-      setOption(type, 3, global);
-    } else if (type == "showGroups") {
-      setOption(type, 1, global);
-    } else if (type == "fastHomeProjs") {
-      setOption(type, 0, global);
-    }else {
-      setOption(type, "", global);
-    }
-    return getOption(type);
+    setOption(type, defVal, true);
+    return getOption(type, defVal);
   }
+
   if (type == "maxHistory" || type == "maxCamels" || type == "showGroups") return parseInt(val);
   return val;
 }
 
-function setOption(type, val, global = false) {
+function setOption(type, val/*, global = false*/) {
   if (val < 0) return;
   
-  var key = window.location.pathname.replace("/ui/", "skysparkTweaks.") + "." + type;
-  if (global) key = "skysparkTweaks." + type;
+  if (typeof val == "boolean") {
+    val = val ? 1 : 0;
+  }
+
+  //var key = window.location.pathname.replace("/ui/", "skysparkTweaks.") + "." + type;
+  //if (global) key = "skysparkTweaks." + type;
+  let key = "skysparkTweaks." + type;
   
   localStorage.setItem(key, val);
   

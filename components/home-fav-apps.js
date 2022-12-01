@@ -18,7 +18,7 @@ class HomeFavApps {
   }
   
   _moveFavApps(node) {
-    var favApps = getOption("favApps", true).split(",");
+    var favApps = getOption("favApps", "").split(",");
     favApps = favApps.filter(x => x != "");
     if (favApps.length == 0) return;
     

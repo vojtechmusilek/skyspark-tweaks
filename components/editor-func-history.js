@@ -9,7 +9,7 @@ class EditorFuncHistory {
   }
   
   _addCurrentFunc(parent, nodes) {
-    var maxHistory = getOption("maxHistory");
+    var maxHistory = getOptionNum("maxHistory", 3);
     if (maxHistory == 0) return;
     
     for (var node of nodes) {
