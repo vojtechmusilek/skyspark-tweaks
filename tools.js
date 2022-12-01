@@ -32,7 +32,9 @@ function getOption(type, global = false) {
       setOption(type, 3, global);
     } else if (type == "showGroups") {
       setOption(type, 1, global);
-    } else {
+    } else if (type == "fastHomeProjs") {
+      setOption(type, 0, global);
+    }else {
       setOption(type, "", global);
     }
     return getOption(type);

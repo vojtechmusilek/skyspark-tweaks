@@ -1,7 +1,6 @@
 window.onload = function() {
   _buttons = new Buttons();
   _buttonSideSwitch = new ButtonSideSwitch();
-  _buttonEditorSettings = new ButtonEditorSettings();
   
   _editorFuncColors = new EditorFuncColors();
   _editorFuncHistory = new EditorFuncHistory();
@@ -22,7 +21,9 @@ window.onclick = onChange;
 function onStart() {
   _buttons.onStart();
   _buttonSideSwitch.onStart();
-  _buttonEditorSettings.onStart();
+
+  new Settings().onStart();
+
   _listenKeys();
   stLog("started");
 }

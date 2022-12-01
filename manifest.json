@@ -19,6 +19,7 @@
       "components/splitview-percentage.js",
       "components/home-fav-apps.js",
       "components/home-projects.js",
+      "components/settings.js",
       "content.js",
       "tools.js"
     ],
