@@ -5,6 +5,11 @@ class HomeProjects {
   onChange() {
     this._searchPopup();
 
+    // shell menu fix
+    if (this.pop) {
+      this._fixMenuItems();
+    }
+
     if (this.pop) {
       this._searchButtonOk();
       this._searchInput();
@@ -134,5 +139,9 @@ class HomeProjects {
     }
 
     $(input).focus();
+  }
+
+  _fixMenuItems() {
+    $(".domkit-control.domkit-MenuItem").height("auto");
   }
 }

@@ -3,6 +3,7 @@ class EditorFuncColors {
     $(".domkit-Box .dom-style-autogen-0").each((index, node) => {
       var cl = $(node).parent().parent().attr('class');
       if (cl != "domkit-Box") return;
+      if ($(node).hasClass("ui-WsViewMenu-faux")) return;
       
       if (getOption("maxHistory") == 0) {
         $(node).css("border-bottom", "1px solid #ccc")
