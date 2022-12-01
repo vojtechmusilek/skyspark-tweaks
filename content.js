@@ -5,6 +5,7 @@ window.onload = function() {
   _editorFuncColors = new EditorFuncColors();
   _editorFuncHistory = new EditorFuncHistory();
   _editorMatchDoEnd = new EditorMatchDoEnd();
+  _editorMatchText = new EditorMatchText();
   _editorKeepSearch = new EditorKeepSearch();
   _splitViewPercentage = new SplitViewPercentage();
 
@@ -34,6 +35,7 @@ function onChange() {
   _editorFuncColors.onChange();
   _editorFuncHistory.onChange();
   _editorMatchDoEnd.onChange();
+  _editorMatchText.onChange();
   _splitViewPercentage.onChange();
   _homeFavApps.onChange();
   _homeProjects.onChange();
@@ -79,6 +81,7 @@ function _listenKeys() {
     keysPressed[key] = true;
     
     _homeProjects.onKeyDown(key);
+    _editorMatchText.onKeyDown(key);
 
     if (keysPressed['control'] && keysPressed['shift'] && key == 'k') {
       _splitViewPercentage.onKey(-10);
