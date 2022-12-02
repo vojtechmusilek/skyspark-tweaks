@@ -40,7 +40,8 @@ class EditorFuncHistory {
   }
 
   _clearDuplicate(name) {
-    let itemsInHistory = $(".skyspark-tweaks-func-history");
+    let itemsInHistory = $(".skyspark-tweaks-func-history").slice(1);
+    
     for (let node of itemsInHistory) {
       if ($(node).text() == name) {
         $(node).detach();
