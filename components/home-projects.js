@@ -10,7 +10,7 @@ class HomeProjects {
       this._fixMenuItems();
     }
 
-    if (getOptionBool("fastHomeProjs", false)) return;
+    if (getOptionBool("fastHomeProjs", false) == false) return;
 
     if (this.pop) {
       this._searchButtonOk();

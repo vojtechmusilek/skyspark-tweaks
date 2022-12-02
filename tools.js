@@ -29,32 +29,24 @@ function getOptionBool(type, defVal) {
 }
 
 function getOption(type, defVal) {
-  //var key = window.location.pathname.replace("/ui/", "skysparkTweaks.") + "." + type;
-  //var val = localStorage.getItem(key);
-  
-  //if (val == null) {
   key = "skysparkTweaks." + type;
   val = localStorage.getItem(key);
-  //}
   
   if (val == null) {
     setOption(type, defVal, true);
     return getOption(type, defVal);
   }
 
-  if (type == "maxHistory" || type == "maxCamels" || type == "showGroups") return parseInt(val);
   return val;
 }
 
-function setOption(type, val/*, global = false*/) {
+function setOption(type, val) {
   if (val < 0) return;
   
   if (typeof val == "boolean") {
     val = val ? 1 : 0;
   }
 
-  //var key = window.location.pathname.replace("/ui/", "skysparkTweaks.") + "." + type;
-  //if (global) key = "skysparkTweaks." + type;
   let key = "skysparkTweaks." + type;
   
   localStorage.setItem(key, val);
