@@ -1,5 +1,6 @@
 class EditorMatchText {
   static allowedKeys = ["arrowdown", "arrowup", "arrowleft", "arrowright", "home", "end"]
+  static ignoredChars = ["(", ")", "{", "}", "[", "]"]
 
   onChange() {
     this._searchEditors();
@@ -31,13 +32,16 @@ class EditorMatchText {
       }
     });
 
+    if (EditorMatchText.ignoredChars.includes(cursorText)) {
+      cursorText = null;
+    }
+
     $(parent).find("span").each((_, node) => {
       const text = $(node).text();
       if (text == "do" || text == "end") return;
       
       if (text == cursorText) {
         $(node).css('background-color', '#0078ff44');
-        //$(node).css('background-color', '#FFFF00');
       }
       else {
         $(node).css('background-color', '');
