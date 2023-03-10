@@ -1,0 +1,32 @@
+{
+  "name": "SkySpark Tweaks",
+  "description": "Adds small tweaks to SkySpark.",
+  "version": "1.4",
+  "manifest_version": 3,
+  "content_scripts": [{
+    "matches": [
+      "http://*/ui/*",
+      "https://*/ui/*"
+    ],
+    "js": [
+      "lib/jquery-3.6.0.js",
+      "components/editor-func-colors.js",
+      "components/editor-func-history.js",
+      "components/editor-match-do-end.js",
+      "components/button-side-switch.js",
+      "components/button-editor-settings.js",
+      "components/buttons.js",
+      "components/home-fav-apps.js",
+      "components/splitview-percentage.js",
+      "content.js",
+      "tools.js"
+    ],
+    "run_at": "document_end"
+  }],
+  "icons": {
+    "16": "/images/skyspark_tweaks16.png",
+    "32": "/images/skyspark_tweaks32.png",
+    "48": "/images/skyspark_tweaks48.png",
+    "128": "/images/skyspark_tweaks128.png"
+  }
+}
