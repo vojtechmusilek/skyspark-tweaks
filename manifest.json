@@ -11,16 +11,18 @@
   },
   "content_scripts": [
     {
-      "run_at": "document_start",
+      "run_at": "document_end",
       "matches": [
         "http://*/ui/*",
         "https://*/ui/*"
       ],
       "js": [
         "lib/jquery-3.6.4.slim.min.js",
-        "src/main.js",
         "src/utils.js",
-        "src/component/test.js"
+        "src/component/code-editor-funcs-coloring.js",
+        "src/component/code-editor-match-do-end.js",
+        "src/observer.js",
+        "src/main.js"
       ]
     }
   ]
