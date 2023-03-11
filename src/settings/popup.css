@@ -18,5 +18,9 @@ body {
 main {
   padding: 1em 0.5em;
   display: grid;
-  place-items: center;
+  place-items: left;
+}
+
+button {
+  margin-top: 10px;
 }
