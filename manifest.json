@@ -9,6 +9,12 @@
     "48": "/image/skyspark_tweaks_48.png",
     "128": "/image/skyspark_tweaks_128.png"
   },
+  "action": {
+    "default_popup": "src/settings/popup.html"
+  },
+  "permissions": [
+    "storage"
+  ],
   "content_scripts": [
     {
       "run_at": "document_end",
