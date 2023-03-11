@@ -13,12 +13,10 @@ class Observer {
     Observer._observer = new MutationObserver((mutations, observer) => {
       for (const mutation of mutations) {
         for (const selectorCallback of Observer._selectorCallbacks) {
-          const item = $(mutation.target).find(selectorCallback.selector).get(0)
+          const target = $(mutation.target).find(selectorCallback.selector).get(0)
 
-          //console.log(item, mutation);
-
-          if (item !== undefined) {
-            selectorCallback.callback(mutations, observer)
+          if (target !== undefined) {
+            selectorCallback.callback(target)
           }
         }
       }

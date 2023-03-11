@@ -1,5 +1,3 @@
-console.log("INJ");
-
 function observerCallback(mutations, observer) {
   let foundDomkit = false;
 
