@@ -1,5 +1,5 @@
 class Observer {
-  static _selectorCallbacks = [];
+  static _subscribers = [];
   static _observer;
 
   constructor() {
@@ -10,13 +10,24 @@ class Observer {
     // attributes?
     const config = { attributes: false, childList: true, subtree: true };
 
-    Observer._observer = new MutationObserver((mutations, observer) => {
+    Observer._observer = new MutationObserver((mutations, _) => {
       for (const mutation of mutations) {
-        for (const selectorCallback of Observer._selectorCallbacks) {
-          const target = $(mutation.target).find(selectorCallback.selector).get(0)
+        for (const subscriber of Observer._subscribers) {
+          const match = $(mutation.target).is(subscriber.selector);
 
-          if (target !== undefined) {
-            selectorCallback.callback(target)
+          // found exact match - target is matching selector
+          if (match) {
+            subscriber.callback(mutation.target);
+            return;
+          }
+
+          if (subscriber.onlyExact) return;
+
+          // check childs
+          const childs = $(mutation.target).find(subscriber.selector);
+
+          for (const child of childs) {
+            subscriber.callback(child)
           }
         }
       }
@@ -26,8 +37,14 @@ class Observer {
   }
 
   static observe(selector, callback) {
-    Observer._selectorCallbacks.push({
-      selector, callback
+    Observer._subscribers.push({
+      selector, callback, onlyExact: false
+    })
+  }
+
+  static observeExact(selector, callback) {
+    Observer._subscribers.push({
+      selector, callback, onlyExact: true
     })
   }
 }
