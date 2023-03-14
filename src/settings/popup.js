@@ -2,6 +2,8 @@ const settings = {
   cefc_max_levels: 1,
   cemde_match: true,
   cefh_max_count: 5,
+  cesh_property_color: "#ce5b29",
+  cesh_bracket_bold: true,
 }
 
 const settingsDefs = {
@@ -18,6 +20,14 @@ const settingsDefs = {
     label: "Editor funcs history <br> (0 = no history)",
     type: "number",
     other: "min=0 max=20",
+  },
+  cesh_property_color: {
+    label: "Editor syntax property color",
+    type: "color",
+  },
+  cesh_bracket_bold: {
+    label: "Editor syntax bracket bold",
+    type: "checkbox",
   },
 }
 

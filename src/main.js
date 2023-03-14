@@ -24,6 +24,7 @@ function initialize() {
   new CodeEditorFuncsColoring();
   new CodeEditorMatchDoEnd();
   new CodeEditorFuncsHistory();
+  new CodeEditorSyntaxHightlight();
 }
 
 const targetNode = $("body").get(0);
