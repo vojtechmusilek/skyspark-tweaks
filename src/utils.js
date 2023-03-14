@@ -24,7 +24,7 @@ async function getSettingsValue(key, defaultValue) {
   const item = await chrome.storage.sync.get([key]);
 
   const val = item[key];
-  if (val) return val;
+  if (val != null) return val;
 
   return defaultValue;
 }

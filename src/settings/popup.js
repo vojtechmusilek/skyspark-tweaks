@@ -7,19 +7,21 @@ const settings = {
 const settingsDefs = {
   cefc_max_levels: {
     label: "Editor funcs coloring <br> (0 = no coloring)",
-    type: "number"
+    type: "number",
+    other: "min=0 max=10",
   },
   cemde_match: {
     label: "Editor do-end matching",
-    type: "checkbox"
+    type: "checkbox",
   },
   cefh_max_count: {
     label: "Editor funcs history <br> (0 = no history)",
-    type: "number"
+    type: "number",
+    other: "min=0 max=20",
   },
 }
 
-const defTemplate = '<div><label for="{key}">{label}</label><br><input type="{type}" name="{key}" id="{key}"></div>';
+const defTemplate = '<div><label for="{key}">{label}</label><br><input type="{type}" {other} name="{key}" id="{key}"></div>';
 
 async function fillValues() {
   const storageValues = await chrome.storage.sync.get(null);
@@ -73,10 +75,15 @@ function fillElements() {
 
   for (const key of Object.keys(settings)) {
     const def = settingsDefs[key];
+
+    let other = def.other;
+    if (!other) other = "";
+
     const newElem = defTemplate
       .replaceAll("{key}", key)
       .replaceAll("{type}", def.type)
-      .replaceAll("{label}", def.label);
+      .replaceAll("{label}", def.label)
+      .replaceAll("{other}", other);
 
     html = newElem + html;
   }
