@@ -1,7 +1,25 @@
 const settings = {
   cefc_max_levels: 1,
   cemde_match: true,
+  cefh_max_count: 5,
 }
+
+const settingsDefs = {
+  cefc_max_levels: {
+    label: "Editor funcs coloring",
+    type: "number"
+  },
+  cemde_match: {
+    label: "Editor do-end matching",
+    type: "checkbox"
+  },
+  cefh_max_count: {
+    label: "Editor funcs history",
+    type: "number"
+  },
+}
+
+const defTemplate = '<div><label for="{key}">{label}</label><br><input type="{type}" name="{key}" id="{key}"></div>';
 
 async function fillValues() {
   const storageValues = await chrome.storage.sync.get(null);
@@ -49,6 +67,28 @@ function fillCheckbox(elem, value) {
   }
 }
 
+function fillElements() {
+  const elem = document.getElementById("settings");
+  let html = elem.innerHTML;
+
+  for (const key of Object.keys(settings)) {
+    const def = settingsDefs[key];
+    const newElem = defTemplate
+      .replaceAll("{key}", key)
+      .replaceAll("{type}", def.type)
+      .replaceAll("{label}", def.label);
+
+    html = newElem + html;
+  }
+
+  elem.innerHTML = html;
+}
+
+if (Object.keys(settings).length != Object.keys(settingsDefs).length) {
+  throw new Error("bad settings consts");
+}
+
+fillElements();
 fillValues();
 
 document.getElementById("save").addEventListener("click", async () => {
