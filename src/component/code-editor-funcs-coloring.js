@@ -15,7 +15,7 @@ class CodeEditorFuncsColoring {
     const maxLevels = await getSettingsValue("cefc_max_levels", 1);
     let lastColor = null;
 
-    for (var node of nodes) {
+    for (const node of nodes) {
       const spanElem = $(node).find("span").get(0);
       if (spanElem.classList.contains(this.colorizedClassName)) break;
 
