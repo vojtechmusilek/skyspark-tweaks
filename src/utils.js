@@ -102,3 +102,7 @@ function shadeColor(color, percent) {
 
   return "#" + RR + GG + BB;
 }
+
+function debug() {
+  return localStorage.getItem("skysparktweaksdebug") != null;
+}

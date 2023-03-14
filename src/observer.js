@@ -2,10 +2,18 @@ class Observer {
   static _subscribers = [];
   static _observer;
 
+  static _selectorCalls = {};
+
   constructor() {
     if (Observer._observer !== undefined) return;
 
     const targetNode = $("body").get(0);
+
+    if (debug()) {
+      setInterval(() => {
+        console.table(Observer._selectorCalls);
+      }, 10000);
+    }
 
     // attributes?
     const config = { attributes: false, childList: true, subtree: true };
@@ -27,7 +35,8 @@ class Observer {
           const childs = $(mutation.target).find(subscriber.selector);
 
           for (const child of childs) {
-            subscriber.callback(child)
+            subscriber.callback(child);
+            Observer._selectorCalls[subscriber.selector]++;
           }
         }
       }
@@ -37,14 +46,15 @@ class Observer {
   }
 
   static observe(selector, callback) {
+    Observer._selectorCalls[selector] = 0;
     Observer._subscribers.push({
       selector, callback, onlyExact: false
     })
   }
 
-  static observeExact(selector, callback) {
-    Observer._subscribers.push({
-      selector, callback, onlyExact: true
-    })
-  }
+  //static observeExact(selector, callback) {
+  //  Observer._subscribers.push({
+  //    selector, callback, onlyExact: true
+  //  })
+  //}
 }

@@ -10,9 +10,6 @@ class CodeEditorFuncsHistory {
     const parent = $(target).parents(this.parentSelector).get(0);
     if (!parent) return;
 
-    //console.log("target", target);
-    //console.log("parent", parent);
-
     this.addCurrentFunc(target, parent)
   }
 
