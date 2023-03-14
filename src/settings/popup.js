@@ -6,7 +6,7 @@ const settings = {
 
 const settingsDefs = {
   cefc_max_levels: {
-    label: "Editor funcs coloring",
+    label: "Editor funcs coloring <br> (0 = no coloring)",
     type: "number"
   },
   cemde_match: {
@@ -14,7 +14,7 @@ const settingsDefs = {
     type: "checkbox"
   },
   cefh_max_count: {
-    label: "Editor funcs history",
+    label: "Editor funcs history <br> (0 = no history)",
     type: "number"
   },
 }

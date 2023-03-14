@@ -25,3 +25,9 @@ button {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+div {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #3a3a3a;
+}
