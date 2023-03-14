@@ -23,6 +23,7 @@ function initialize() {
   new Observer();
   new CodeEditorFuncsColoring();
   new CodeEditorMatchDoEnd();
+  new CodeEditorFuncsHistory();
 }
 
 const targetNode = $("body").get(0);
