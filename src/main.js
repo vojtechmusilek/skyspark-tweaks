@@ -21,10 +21,12 @@ function observerCallback(mutations, observer) {
 
 function initialize() {
   new Observer();
+
   new CodeEditorFuncsColoring();
-  new CodeEditorMatchDoEnd();
   new CodeEditorFuncsHistory();
+  new CodeEditorMatchDoEnd();
   new CodeEditorSyntaxHightlight();
+  new NavbarButtons();
 }
 
 const targetNode = $("body").get(0);

@@ -29,6 +29,7 @@
         "src/component/code-editor-funcs-history.js",
         "src/component/code-editor-match-do-end.js",
         "src/component/code-editor-syntax-highlight.js",
+        "src/component/navbar-buttons.js",
         "src/observer.js",
         "src/main.js"
       ]
