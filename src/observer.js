@@ -35,8 +35,8 @@ class Observer {
           const childs = $(mutation.target).find(subscriber.selector);
 
           for (const child of childs) {
-            subscriber.callback(child);
             Observer._selectorCalls[subscriber.selector]++;
+            subscriber.callback(child);
           }
         }
       }
@@ -50,6 +50,11 @@ class Observer {
     Observer._subscribers.push({
       selector, callback, onlyExact: false
     })
+  }
+
+  static stopObserving(selector) {
+    delete Observer._selectorCalls[selector];
+    Observer._subscribers = Observer._subscribers.filter(item => item.selector != selector);
   }
 
   //static observeExact(selector, callback) {

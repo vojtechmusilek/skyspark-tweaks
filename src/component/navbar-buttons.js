@@ -1,19 +1,21 @@
 class NavbarButtons {
   constructor() {
-    Observer.observe('a[href="https://skyfoundry.com/skyspark"]', this.update.bind(this));
+    Observer.observe(this.cssSelector_SkysparkLogo, this.updateButtons.bind(this));
+    Observer.observe(this.cssSelector_RightSplitView, this.updateExtend.bind(this));
   }
 
   class_Navbar = "skyspark-tweaks-navbar";
   cssSelector_Navbar = "." + this.class_Navbar;
+  cssSelector_RightSplitView = "#ws-right";
+  cssSelector_SkysparkLogo = 'a[href="https://skyfoundry.com/skyspark"]';
 
   buttonsAdded = false;
-
 
   splitViewExtendValue = 50;
   splitViewExtendStep = 10;
 
-  update(target) {
-    if (this.buttonsAdded) return;
+  updateButtons(target) {
+    Observer.stopObserving(this.cssSelector_SkysparkLogo);
 
     const navbar = $(target).parent().parent();
     navbar.addClass(this.class_Navbar);
@@ -22,8 +24,10 @@ class NavbarButtons {
     this.addButton("undo", "Split View Reset Size", this.onExtendReset.bind(this));
     this.addButton("navRight", "Split View Extend Left", this.onExtendLeft.bind(this));
     this.addButton("navLeft", "Split View Extend Right", this.onExtendRight.bind(this));
+  }
 
-    this.buttonsAdded = true;
+  updateExtend() {
+    this.setSplitViewPercentage(this.splitViewExtendValue);
   }
 
   getIconSrc(icon) {
@@ -122,8 +126,6 @@ class NavbarButtons {
 
     const leftValue = newVal;
     const rightValue = 100 - newVal;
-
-    console.log({ left, right, newVal, leftValue, rightValue });
 
     $(left).css("width", `calc(${leftValue}% - 5px)`);
     $(right).css("width", `calc(${rightValue}% - 5px)`);
