@@ -44,7 +44,51 @@ class NavbarButtons {
   }
 
   onClickSwap() {
-    console.log("todo swap");
+    const hash = window.location.hash.replace("#", "");
+    if (hash == null || hash == "") return;
+
+    const data = sessionStorage.getItem(hash);
+    const trimmed = data.substring(1, data.length - 1);
+
+    let obj = {};
+    let stack = "";
+    let pointer = "";
+    let bracket = 0;
+
+    for (let index = 0; index < trimmed.length; index++) {
+      const char = trimmed[index];
+
+      if (char == "N" && stack == "" && bracket == 0) {
+        obj[pointer] = char;
+        stack = "";
+      }
+
+      if (char == ":" && bracket == 0) {
+        pointer = stack.trim();
+        stack = "";
+      } else {
+        stack += char;
+      }
+
+      if (char == "{") bracket++;
+      if (char == "}") bracket--;
+
+      if (char == "}" && bracket == 0) {
+        obj[pointer] = stack;
+        stack = "";
+      }
+    }
+
+    // 3.1.7+
+    const missingRight = !obj.hasOwnProperty("right");
+    // 3.1.6-
+    const nullRight = obj.right == "N";
+    if (missingRight || nullRight) return;
+
+    const newData = `{left:${obj.right} right:${obj.left}}`;
+    sessionStorage.setItem(hash, newData);
+    window.location.href = window.location.href;
   }
+
 
 }
