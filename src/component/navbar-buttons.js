@@ -8,16 +8,20 @@ class NavbarButtons {
 
   buttonsAdded = false;
 
+
+  splitViewExtendValue = 50;
+  splitViewExtendStep = 10;
+
   update(target) {
     if (this.buttonsAdded) return;
 
     const navbar = $(target).parent().parent();
     navbar.addClass(this.class_Navbar);
 
-    this.addButton("layout2h", "Swap Split View", this.onClickSwap);
-    this.addButton("undo", "todo", null);
-    this.addButton("navRight", "todo", null);
-    this.addButton("navLeft", "todo", null);
+    this.addButton("layout2h", "Swap Split View", this.onClickSwap.bind(this));
+    this.addButton("undo", "Split View Reset Size", this.onExtendReset.bind(this));
+    this.addButton("navRight", "Split View Extend Left", this.onExtendLeft.bind(this));
+    this.addButton("navLeft", "Split View Extend Right", this.onExtendRight.bind(this));
 
     this.buttonsAdded = true;
   }
@@ -90,5 +94,40 @@ class NavbarButtons {
     window.location.href = window.location.href;
   }
 
+  onExtendLeft() {
+    this.setSplitViewPercentage(this.splitViewExtendValue + this.splitViewExtendStep);
+  }
 
+  onExtendRight() {
+    this.setSplitViewPercentage(this.splitViewExtendValue - this.splitViewExtendStep);
+  }
+
+  onExtendReset() {
+    this.setSplitViewPercentage(50);
+  }
+
+  setSplitViewPercentage(newVal) {
+    if (newVal < 10) {
+      this.splitViewExtendValue = 10;
+      return;
+    }
+    if (newVal > 90) {
+      this.splitViewExtendValue = 90;
+      return;
+    }
+
+    const left = $("#ws-left").get(0);
+    const right = $("#ws-right").get(0);
+    if (right == null) return;
+
+    const leftValue = newVal;
+    const rightValue = 100 - newVal;
+
+    console.log({ left, right, newVal, leftValue, rightValue });
+
+    $(left).css("width", `calc(${leftValue}% - 5px)`);
+    $(right).css("width", `calc(${rightValue}% - 5px)`);
+
+    this.splitViewExtendValue = newVal;
+  }
 }
