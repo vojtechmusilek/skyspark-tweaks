@@ -1,6 +1,6 @@
 class NavbarButtons {
   constructor() {
-    Observer.observe(this.cssSelector_SkysparkLogo, this.updateButtons.bind(this));
+    Observer.observeOnce(this.cssSelector_SkysparkLogo, this.updateButtons.bind(this));
     Observer.observe(this.cssSelector_RightSplitView, this.updateExtend.bind(this));
   }
 
@@ -15,8 +15,6 @@ class NavbarButtons {
   splitViewExtendStep = 10;
 
   updateButtons(target) {
-    Observer.stopObserving(this.cssSelector_SkysparkLogo);
-
     const navbar = $(target).parent().parent();
     navbar.addClass(this.class_Navbar);
 

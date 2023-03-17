@@ -1,6 +1,6 @@
 class HomeFavApps {
   constructor() {
-    Observer.observe("div.ui-AppPicker", this.update.bind(this));
+    Observer.observeOnce("div.ui-AppPicker", this.update.bind(this));
   }
 
   class_FavApps = "skyspark-tweaks-fav-apps";
@@ -48,15 +48,17 @@ class HomeFavApps {
     const favNodes = {};
     let otherNodes = [];
 
-    allApps.each((i, app) => {
-      const appName = $(app).text();
+    const allAppNames = allApps.get().map(x => $(x).text());
+    favApps = favApps.filter(element => allAppNames.includes(element));
 
+    for (const app of allApps) {
+      const appName = $(app).text();
       if (favApps.includes(appName)) {
         favNodes[appName] = app;
       } else {
         otherNodes.push(app);
       }
-    })
+    }
 
     if (Object.keys(favNodes).length == 0) {
       const parent = $(node).parent();

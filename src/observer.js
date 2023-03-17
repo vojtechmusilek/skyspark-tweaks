@@ -2,7 +2,7 @@ class Observer {
   static _subscribers = [];
   static _observer;
 
-  static _selectorCalls = {};
+  static _debug_selectorCalls = {};
 
   constructor() {
     if (Observer._observer !== undefined) return;
@@ -11,32 +11,44 @@ class Observer {
 
     if (debug()) {
       setInterval(() => {
-        console.table(Observer._selectorCalls);
+        console.table(Observer._debug_selectorCalls);
       }, 10000);
     }
 
     // attributes?
     const config = { attributes: false, childList: true, subtree: true };
 
+    const doCallback = (subscriber, elem) => {
+      if (subscriber.once && subscriber.calledTargets.includes(elem)) {
+        return;
+      }
+
+      Observer._debug_selectorCalls[subscriber.selector]++;
+      subscriber.callback(elem);
+
+      if (subscriber.once) {
+        subscriber.calledTargets.push(elem);
+      }
+    }
+
     Observer._observer = new MutationObserver((mutations, _) => {
       for (const mutation of mutations) {
         for (const subscriber of Observer._subscribers) {
-          const match = $(mutation.target).is(subscriber.selector);
-
           // found exact match - target is matching selector
+          const match = $(mutation.target).is(subscriber.selector);
           if (match) {
-            subscriber.callback(mutation.target);
+            doCallback(subscriber, mutation.target);
             return;
           }
 
-          if (subscriber.onlyExact) return;
+          if (subscriber.exact) {
+            return;
+          }
 
           // check childs
           const childs = $(mutation.target).find(subscriber.selector);
-
           for (const child of childs) {
-            Observer._selectorCalls[subscriber.selector]++;
-            subscriber.callback(child);
+            doCallback(subscriber, child);
           }
         }
       }
@@ -46,20 +58,27 @@ class Observer {
   }
 
   static observe(selector, callback) {
-    Observer._selectorCalls[selector] = 0;
+    Observer._debug_selectorCalls[selector] = 0;
     Observer._subscribers.push({
-      selector, callback, onlyExact: false
+      selector, callback
     })
   }
 
-  static stopObserving(selector) {
-    delete Observer._selectorCalls[selector];
-    Observer._subscribers = Observer._subscribers.filter(item => item.selector != selector);
+  static observeOnce(selector, callback) {
+    Observer._debug_selectorCalls[selector] = 0;
+    Observer._subscribers.push({
+      selector, callback, once: true, calledTargets: []
+    })
   }
 
   //static observeExact(selector, callback) {
   //  Observer._subscribers.push({
-  //    selector, callback, onlyExact: true
+  //    selector, callback, exact: true
   //  })
   //}
+
+  static stopObserving(selector) {
+    delete Observer._debug_selectorCalls[selector];
+    Observer._subscribers = Observer._subscribers.filter(item => item.selector != selector);
+  }
 }

@@ -33,7 +33,7 @@ const settingsDefs = {
   hfa_apps: {
     label: "Favorite Apps <br> (separated by comma)",
     type: "text",
-    other: 'placeholder="eg. Code,Tools"',
+    other: 'placeholder="eg. Code,Tools" style="width: 220px;"',
   },
 }
 
@@ -120,9 +120,10 @@ document.getElementById("save").addEventListener("click", async () => {
   for (const key of Object.keys(settings)) {
     const elem = document.getElementById(key);
     let value = elem.getAttribute("value");
-    if (!value) {
+    if (value == null) {
       value = elem.hasAttribute("checked");
     }
+
     toSet[key] = value;
   }
 
