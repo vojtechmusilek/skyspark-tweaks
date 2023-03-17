@@ -4,6 +4,7 @@ const settings = {
   cefh_max_count: 5,
   cesh_property_color: "#ce5b29",
   cesh_bracket_bold: true,
+  hfa_apps: "",
 }
 
 const settingsDefs = {
@@ -28,6 +29,11 @@ const settingsDefs = {
   cesh_bracket_bold: {
     label: "Editor syntax bracket bold",
     type: "checkbox",
+  },
+  hfa_apps: {
+    label: "Favorite Apps <br> (separated by comma)",
+    type: "text",
+    other: 'placeholder="eg. Code,Tools"',
   },
 }
 
