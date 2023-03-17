@@ -4,6 +4,7 @@ class HomeFavApps {
   }
 
   class_FavApps = "skyspark-tweaks-fav-apps";
+  class_FavAppsSpacing = this.class_FavApps + "-spacing";
 
   update(target) {
     const nodeStyle = $(target).attr("style");
@@ -26,15 +27,22 @@ class HomeFavApps {
     const allApps = $(node).find("td").detach();
 
     let width = 600;
-    const isPopup = $(node).parents('.domkit-Popup').length >= 1;
+    const isPopup = $(node).parents(".domkit-Popup").length >= 1;
     if (isPopup) width = 432;
 
-    const line = `<div style="border-top: 1px solid rgb(217, 217, 217); margin: 4px 0px;"></div>`;
-    const spacing = `<div class="skyspark-tweaks-fav-apps-spacing" style="width: ${width}px; margin: 0px auto; padding: 8px 0px 4px;">${line}</div>`
+    const line = $("<div>").css({
+      borderTop: "1px solid rgb(217, 217, 217)",
+      margin: "4px 0px"
+    });
+    const spacing = $("<div>").addClass(this.class_FavAppsSpacing).css({
+      width: `${width}px`,
+      margin: "0px auto",
+      padding: "8px 0px 4px"
+    }).append(line);
+
     $(node).parent().prepend(spacing);
 
-    const favNode = $(node).clone();
-    $(favNode).addClass("skyspark-tweaks-fav-apps");
+    const favNode = $(node).clone().addClass(this.class_FavApps);
     $(node).parent().prepend(favNode);
 
     const favNodes = {};
@@ -52,11 +60,11 @@ class HomeFavApps {
 
     if (Object.keys(favNodes).length == 0) {
       const parent = $(node).parent();
-      $(parent).find(".skyspark-tweaks-fav-apps-spacing").css("display", "none");
-      $(parent).find(".skyspark-tweaks-fav-apps").css("display", "none");
+      parent.find("." + this.class_FavAppsSpacing).hide();
+      parent.find("." + this.class_FavApps).hide();
     }
 
-    $(favNode).find("tr").each((i, row) => {
+    favNode.find("tr").each((i, row) => {
       const slice = favApps.slice(0, 6);
       if (slice.length == 0) return;
       favApps = favApps.filter((t, i) => i >= 6);
@@ -66,7 +74,7 @@ class HomeFavApps {
       });
     });
 
-    $(node).find("tr").each((i, row) => {
+    node.find("tr").each((i, row) => {
       const slice = otherNodes.slice(0, 6);
       if (slice.length == 0) return;
       otherNodes = otherNodes.filter((t, i) => i >= 6);
