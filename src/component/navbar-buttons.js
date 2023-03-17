@@ -18,7 +18,7 @@ class NavbarButtons {
     const navbar = $(target).parent().parent();
     navbar.addClass(this.class_Navbar);
 
-    this.addButton("layout2h", "Swap Split View", this.onClickSwap.bind(this));
+    this.addButton("layout2h", "Split View Swap Sides", this.onClickSwap.bind(this));
     this.addButton("undo", "Split View Reset Size", this.onExtendReset.bind(this));
     this.addButton("navRight", "Split View Extend Left", this.onExtendLeft.bind(this));
     this.addButton("navLeft", "Split View Extend Right", this.onExtendRight.bind(this));
