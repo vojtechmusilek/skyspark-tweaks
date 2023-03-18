@@ -4,10 +4,10 @@
   "version": "2.0.0",
   "description": "Adds small tweaks to SkySpark.",
   "icons": {
-    "16": "/image/skyspark_tweaks_16.png",
-    "32": "/image/skyspark_tweaks_32.png",
-    "48": "/image/skyspark_tweaks_48.png",
-    "128": "/image/skyspark_tweaks_128.png"
+    "16": "/img/icons/skyspark_tweaks_16.png",
+    "32": "/img/icons/skyspark_tweaks_32.png",
+    "48": "/img/icons/skyspark_tweaks_48.png",
+    "128": "/img/icons/skyspark_tweaks_128.png"
   },
   "action": {
     "default_popup": "src/settings/popup.html"
