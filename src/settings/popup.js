@@ -5,6 +5,7 @@ const settings = {
   cesh_property_color: "#ce5b29",
   cesh_bracket_bold: true,
   hfa_apps: "",
+  cemt_match: true,
 }
 
 const settingsDefs = {
@@ -34,6 +35,10 @@ const settingsDefs = {
     label: "Favorite Apps <br> (separated by comma)",
     type: "text",
     other: 'placeholder="eg. Code,Tools" style="width: 220px;"',
+  },
+  cemt_match: {
+    label: "Editor text matching",
+    type: "checkbox",
   },
 }
 

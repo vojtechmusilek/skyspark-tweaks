@@ -7,6 +7,7 @@ Customizable features using extension settings.
   - Functions camelCase coloring
   - Opened functions history
   - Matching do-end in code
+  - Matching text in code
   - CodeMirror property color
   - CodeMirror bold bracket
 - Split view (navbar buttons)

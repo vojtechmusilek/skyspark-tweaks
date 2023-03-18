@@ -25,6 +25,7 @@ function initialize() {
   new CodeEditorFuncsColoring();
   new CodeEditorFuncsHistory();
   new CodeEditorMatchDoEnd();
+  new CodeEditorMatchText();
   new CodeEditorSyntaxHightlight();
   new HomeFavApps();
   new NavbarButtons();
