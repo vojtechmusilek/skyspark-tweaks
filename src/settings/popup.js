@@ -1,50 +1,50 @@
 const settingsDefs = {
   CodeEditorFuncsColoring_levels: {
     defVal: 1,
-    label: "Editor funcs coloring <br> (0 = no coloring)",
+    label: "Editor Funcs Coloring <br> (0 = no coloring)",
     type: "number",
     other: "min=0 max=10",
   },
   CodeEditorMatchDoEnd_enabled: {
     defVal: true,
-    label: "Editor do-end matching",
+    label: "Editor do-end Matching",
     type: "checkbox",
   },
   CodeEditorFuncsHistory_count: {
     defVal: 5,
-    label: "Editor funcs history <br> (0 = no history)",
+    label: "Editor Funcs History <br> (0 = no history)",
     type: "number",
     other: "min=0 max=20",
   },
   CodeEditorSyntaxHightlight_color: {
     defVal: "#ce5b29",
-    label: "Editor syntax property color",
+    label: "Editor Syntax Property Color",
     type: "color",
   },
   CodeEditorSyntaxHightlight_boldBracket: {
     defVal: true,
-    label: "Editor syntax bracket bold",
+    label: "Editor Syntax Bracket Bold",
     type: "checkbox",
   },
   HomeFavApps_appList: {
     defVal: "",
-    label: "Favorite Apps <br> (separated by comma)",
+    label: "Homescreen Favorite Apps <br> (separated by comma)",
     type: "text",
     other: 'placeholder="eg. Code,Tools" style="width: 220px;"',
   },
   CodeEditorMatchText_enabled: {
     defVal: true,
-    label: "Editor text matching",
+    label: "Editor Text Matching",
     type: "checkbox",
   },
   CodeEditorKeepFuncsSearch_enabled: {
     defVal: true,
-    label: "Preserve editor search after refresh",
+    label: "Preserve Editor Search After Refresh",
     type: "checkbox",
   },
 }
 
-const defTemplate = '<div><label for="{key}">{label}</label><br><input type="{type}" {other} name="{key}" id="{key}"></div>';
+const defTemplate = '<tr><td><label for="{key}">{label}</label></td><td><input type="{type}" {other} id="{key}"></td></tr>';
 const settingsKeys = Object.keys(settingsDefs);
 
 async function fillValues() {
