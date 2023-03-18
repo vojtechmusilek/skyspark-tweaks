@@ -15,21 +15,32 @@ function observerCallback(mutations, observer) {
 
   if (foundDomkit) {
     initialize();
-    console.log("SkySpark tweaks initialized");
   }
 };
 
-function initialize() {
+async function initialize() {
   new Observer();
 
   new CodeEditorFuncsColoring();
   new CodeEditorFuncsHistory();
-  new CodeEditorKeepFuncsSearch();
-  new CodeEditorMatchDoEnd();
-  new CodeEditorMatchText();
+
+  if (await getSettingsValue("CodeEditorKeepFuncsSearch_enabled", true)) {
+    new CodeEditorKeepFuncsSearch();
+  }
+
+  if (await getSettingsValue("CodeEditorMatchDoEnd_enabled", true)) {
+    new CodeEditorMatchDoEnd();
+  }
+
+  if (await getSettingsValue("CodeEditorMatchText_enabled", true)) {
+    new CodeEditorMatchText();
+  }
+
   new CodeEditorSyntaxHightlight();
   new HomeFavApps();
   new NavbarButtons();
+
+  console.log("SkySpark tweaks initialized");
 }
 
 const targetNode = $("body").get(0);

@@ -3,10 +3,7 @@ class CodeEditorMatchDoEnd {
     Observer.observe(".CodeMirror-cursor", this.update.bind(this));
   }
 
-  async update(cursor) {
-    const matchDoEnd = await getSettingsValue("CodeEditorMatchDoEnd_enabled", true);
-    if (!matchDoEnd) return;
-
+  update(cursor) {
     const parent = $(cursor).parents(".CodeMirror-scroll").get(0);
     if (!parent) return;
 

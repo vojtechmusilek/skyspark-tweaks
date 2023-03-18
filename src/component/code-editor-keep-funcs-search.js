@@ -7,10 +7,7 @@ class CodeEditorKeepFuncsSearch {
 
   dataKey = "skyspark-tweaks-hash";
 
-  async update(target) {
-    const enabled = await getSettingsValue("CodeEditorKeepFuncsSearch_enabled", true);
-    if (!enabled) return;
-
+  update(target) {
     $(target).on("input", this.onInput.bind(this));
 
     const hash = getNodeHash(target);
