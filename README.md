@@ -1,14 +1,20 @@
-Multiple small changes for better user experience in SkySpark.
+Many small features for better user experience in SkySpark.
 
- **Features**
-- Split View Sides Switch - when split view open, it switches sides (left to right and right to left)
-- Split View Sides Percentage - when split view open, using Ctrl+Shift+K and Ctrl+Shift+L to change size of sides
-- Editor Settings - opens settings
-- Editor matching "do" "end" blocks highlighting
-- Editor extra keywords css colors
-- Home - Favourite apps
+Customizable features using extension settings.
 
-**Editor Settings**
-- Coloring - camelCase coloring option (0 = no coloring)
-- Func History - amount of function names shown in history (0 = no history)
-- Func groups - shows lines between same colored functions
+**Features**
+- Code editor
+  - Functions camelCase coloring
+  - Opened functions history
+  - Preserving editor search after refresh
+  - Matching do-end in code
+  - Matching text in code
+  - CodeMirror property color
+  - CodeMirror bold bracket
+- Split view (navbar buttons)
+  - Extend right
+  - Extend left
+  - Reset size
+  - Swap sides
+- Etc
+  - Favorite apps in home view
