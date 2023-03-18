@@ -24,6 +24,7 @@ function initialize() {
 
   new CodeEditorFuncsColoring();
   new CodeEditorFuncsHistory();
+  new CodeEditorKeepFuncsSearch();
   new CodeEditorMatchDoEnd();
   new CodeEditorMatchText();
   new CodeEditorSyntaxHightlight();

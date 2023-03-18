@@ -6,6 +6,7 @@ const settings = {
   cesh_bracket_bold: true,
   hfa_apps: "",
   cemt_match: true,
+  cekfs_enabled: true,
 }
 
 const settingsDefs = {
@@ -38,6 +39,10 @@ const settingsDefs = {
   },
   cemt_match: {
     label: "Editor text matching",
+    type: "checkbox",
+  },
+  cekfs_enabled: {
+    label: "Preserve editor search after refresh",
     type: "checkbox",
   },
 }

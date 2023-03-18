@@ -6,6 +6,7 @@ Customizable features using extension settings.
 - Code editor
   - Functions camelCase coloring
   - Opened functions history
+  - Preserving editor search after refresh
   - Matching do-end in code
   - Matching text in code
   - CodeMirror property color

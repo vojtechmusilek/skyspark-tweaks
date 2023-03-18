@@ -29,6 +29,18 @@ async function getSettingsValue(key, defaultValue) {
   return defaultValue;
 }
 
+function getNodeHash(node) {
+  const path = [];
+  let currentNode = node;
+
+  while (currentNode) {
+    path.unshift(currentNode.nodeName + currentNode.id); // + currentNode.className
+    currentNode = currentNode.parentNode || currentNode.host;
+  }
+
+  return new TextEncoder().encode(path).join('');
+}
+
 function camelSplit(str) {
   return str.replace(/([a-z0-9])([A-Z])/g, '$1 $2').split(' ');
 }
@@ -101,6 +113,10 @@ function shadeColor(color, percent) {
   var BB = ((B.toString(16).length == 1) ? "0" + B.toString(16) : B.toString(16));
 
   return "#" + RR + GG + BB;
+}
+
+function getProjectName() {
+  return window.location.pathname.replace("/ui/", "");
 }
 
 function debug() {
