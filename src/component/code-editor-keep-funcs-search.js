@@ -7,13 +7,26 @@ class CodeEditorKeepFuncsSearch {
 
   dataKey = "skyspark-tweaks-hash";
 
-  update(target) {
+  async update(target) {
+    const enabled = await getSettingsValue("CodeEditorKeepFuncsSearch_enabled", true);
+    if (!enabled) return;
+
     $(target).on("input", this.onInput.bind(this));
 
-    const hash = getNodeHash(target);
+    const hash = await getNodeHash(target);
     $(target).data(this.dataKey, hash);
 
-    this.tryFill(target, hash);
+    const val = this.tryFillAndGetValue(target, hash);
+    if (val == "") return;
+
+    // perform manual hide, because sometimes functions
+    // are not filtered even if the filter is set
+    for (const child of $(target).next().children()) {
+      const funcName = child.innerText;
+      if (!funcName.includes(val)) {
+        $(child).hide();
+      }
+    }
   }
 
   onInput(event) {
@@ -23,11 +36,12 @@ class CodeEditorKeepFuncsSearch {
     sessionStorage.setItem(this.getSessionStorageKey(hash), value);
   }
 
-  tryFill(target, hash) {
+  tryFillAndGetValue(target, hash) {
     const value = sessionStorage.getItem(this.getSessionStorageKey(hash));
-    if (value == null) return;
+    if (value == null) return "";
 
     $(target).val(value);
+    return value;
   }
 
   getSessionStorageKey(hash) {

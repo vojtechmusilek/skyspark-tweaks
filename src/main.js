@@ -15,36 +15,23 @@ function observerCallback(mutations, observer) {
 
   if (foundDomkit) {
     initialize();
+    console.log("SkySpark tweaks initialized");
   }
 };
 
-async function initialize() {
+function initialize() {
   new Observer();
 
   new CodeEditorFuncsColoring();
   new CodeEditorFuncsHistory();
-
-  if (await getSettingsValue("CodeEditorKeepFuncsSearch_enabled", true)) {
-    new CodeEditorKeepFuncsSearch();
-  }
-
-  if (await getSettingsValue("CodeEditorMatchDoEnd_enabled", true)) {
-    new CodeEditorMatchDoEnd();
-  }
-
-  if (await getSettingsValue("CodeEditorMatchText_enabled", true)) {
-    new CodeEditorMatchText();
-  }
-
+  new CodeEditorKeepFuncsSearch();
+  new CodeEditorMatchDoEnd();
+  new CodeEditorMatchText();
   new CodeEditorSyntaxHightlight();
   new HomeFavApps();
   new NavbarButtons();
-
-  console.log("SkySpark tweaks initialized");
 }
 
-const targetNode = $("body").get(0);
 const config = { attributes: true, childList: true, subtree: true };
 const observer = new MutationObserver(observerCallback);
-
-observer.observe(targetNode, config);
+observer.observe(document.body, config);

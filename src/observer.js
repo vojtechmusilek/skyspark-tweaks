@@ -7,8 +7,6 @@ class Observer {
   constructor() {
     if (Observer._observer !== undefined) return;
 
-    const targetNode = $("body").get(0);
-
     if (debug()) {
       setInterval(() => {
         console.table(Observer._debug_selectorCalls);
@@ -54,7 +52,7 @@ class Observer {
       }
     });
 
-    Observer._observer.observe(targetNode, config);
+    Observer._observer.observe(document.body, config);
   }
 
   static observe(selector, callback) {

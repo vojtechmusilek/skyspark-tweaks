@@ -29,16 +29,16 @@ async function getSettingsValue(key, defaultValue) {
   return defaultValue;
 }
 
-function getNodeHash(node) {
+async function getNodeHash(node) {
   const path = [];
   let currentNode = node;
 
   while (currentNode) {
-    path.unshift(currentNode.nodeName + currentNode.id); // + currentNode.className
+    path.unshift(currentNode.nodeName + currentNode.id);
     currentNode = currentNode.parentNode || currentNode.host;
   }
 
-  return new TextEncoder().encode(path).join('');
+  return (new Uint8Array(await crypto.subtle.digest("SHA-1", new TextEncoder().encode(path)))).join('')
 }
 
 function camelSplit(str) {
