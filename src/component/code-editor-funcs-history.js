@@ -18,7 +18,7 @@ class CodeEditorFuncsHistory {
   }
 
   async addCurrentFunc(target, parent) {
-    const maxCount = await getSettingsValue("cefh_max_count", 5);
+    const maxCount = await getSettingsValue("CodeEditorFuncsHistory_count", 5);
     if (maxCount == 0) return;
 
     const spanElem = $(target).find("span").get(0);

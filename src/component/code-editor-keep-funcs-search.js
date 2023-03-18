@@ -8,7 +8,7 @@ class CodeEditorKeepFuncsSearch {
   dataKey = "skyspark-tweaks-hash";
 
   async update(target) {
-    const enabled = await getSettingsValue("cekfs_enabled", true);
+    const enabled = await getSettingsValue("CodeEditorKeepFuncsSearch_enabled", true);
     if (!enabled) return;
 
     $(target).on("input", this.onInput.bind(this));

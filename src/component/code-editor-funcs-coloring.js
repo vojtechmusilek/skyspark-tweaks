@@ -12,7 +12,7 @@ class CodeEditorFuncsColoring {
   }
 
   async colorizeFuncs(nodes) {
-    const maxLevels = await getSettingsValue("cefc_max_levels", 1);
+    const maxLevels = await getSettingsValue("CodeEditorFuncsColoring_levels", 1);
     let lastColor = null;
 
     for (const node of nodes) {

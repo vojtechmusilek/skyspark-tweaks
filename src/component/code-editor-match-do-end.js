@@ -4,7 +4,7 @@ class CodeEditorMatchDoEnd {
   }
 
   async update(cursor) {
-    const matchDoEnd = await getSettingsValue("cemde_match", true);
+    const matchDoEnd = await getSettingsValue("CodeEditorMatchDoEnd_enabled", true);
     if (!matchDoEnd) return;
 
     const parent = $(cursor).parents(".CodeMirror-scroll").get(0);

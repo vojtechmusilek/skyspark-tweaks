@@ -20,7 +20,7 @@ class HomeFavApps {
   }
 
   async moveFavApps(node) {
-    const favAppsStr = await getSettingsValue("hfa_apps", "");
+    const favAppsStr = await getSettingsValue("HomeFavApps_appList", "");
     let favApps = favAppsStr.split(",").filter(x => x != "");
     if (favApps.length == 0) return;
 

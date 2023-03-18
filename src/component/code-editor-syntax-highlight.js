@@ -4,8 +4,8 @@ class CodeEditorSyntaxHightlight {
   }
 
   async start() {
-    const propertyColor = await getSettingsValue("cesh_property_color", "#ce5b29");
-    const bracketBold = await getSettingsValue("cesh_bracket_bold", true);
+    const propertyColor = await getSettingsValue("CodeEditorSyntaxHightlight_color", "#ce5b29");
+    const bracketBold = await getSettingsValue("CodeEditorSyntaxHightlight_boldBracket", true);
 
     let styleString = `.cm-property { color: ${propertyColor};}\n`;
 

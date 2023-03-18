@@ -6,7 +6,7 @@ class CodeEditorMatchText {
   ignoredTexts = ["(", ")", "{", "}", "[", "]", "return"]
 
   async update(cursor) {
-    const matchEnabled = await getSettingsValue("cemt_match", true);
+    const matchEnabled = await getSettingsValue("CodeEditorMatchText_enabled", true);
     if (!matchEnabled) return;
 
     const parent = $(cursor).parents(".CodeMirror-scroll").get(0);
