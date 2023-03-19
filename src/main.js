@@ -29,6 +29,7 @@ function initialize() {
   new CodeEditorMatchText();
   new CodeEditorSyntaxHightlight();
   new HomeFavApps();
+  new HomeProjectPicker();
   new NavbarButtons();
 }
 

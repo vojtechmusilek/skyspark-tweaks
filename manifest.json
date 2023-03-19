@@ -33,6 +33,7 @@
         "src/component/code-editor-match-text.js",
         "src/component/code-editor-syntax-highlight.js",
         "src/component/home-fav-apps.js",
+        "src/component/home-project-picker.js",
         "src/component/navbar-buttons.js",
         "src/observer.js",
         "src/main.js"
