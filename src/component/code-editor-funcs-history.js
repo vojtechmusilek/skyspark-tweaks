@@ -3,14 +3,14 @@ class CodeEditorFuncsHistory {
     Observer.observe(this.cssSelector_SelectedDiv, this.update.bind(this));
   }
 
-  cssSelector_SelectedDiv = Constant.Selector_EditorFuncs + " > div[style*='background: rgb(214, 234, 255)']";
+  cssSelector_SelectedDiv = Selector.EditorFuncs + " > div[style*='background: rgb(214, 234, 255)']";
 
   class_NewElem = "domkit-control domkit-Label skyspark-tweaks-func-history";
   style_NewElem = "color: #555; width: 100%; display: block; overflow: hidden; " +
     "background: #fff; border: 1px solid #bbb; user-select: all; padding: 4px 4px; border-top-style: hidden;";
 
   update(target) {
-    const parent = $(target).parents(Constant.Selector_EditorFuncs).get(0);
+    const parent = $(target).parents(Selector.EditorFuncs).get(0);
     if (!parent) return;
 
     this.addCurrentFunc(target, parent)

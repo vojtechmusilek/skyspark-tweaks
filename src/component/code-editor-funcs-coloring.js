@@ -1,6 +1,6 @@
 class CodeEditorFuncsColoring {
   constructor() {
-    Observer.observe(Constant.Selector_EditorFuncs, this.update.bind(this));
+    Observer.observe(Selector.EditorFuncs, this.update.bind(this));
   }
 
   colorizedClassName = "skyspark-tweaks-colorized";

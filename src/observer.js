@@ -4,6 +4,8 @@ class Observer {
 
   static _debug_selectorCalls = {};
 
+  static _id = 1;
+
   constructor() {
     if (Observer._observer !== undefined) return;
 
@@ -21,11 +23,19 @@ class Observer {
         return;
       }
 
+      if (subscriber.stop) {
+        return;
+      }
+
       Observer._debug_selectorCalls[subscriber.selector]++;
       subscriber.callback(elem);
 
       if (subscriber.once) {
         subscriber.calledTargets.push(elem);
+      }
+
+      if (subscriber.first) {
+        Observer.stopObserving(subscriber.id)
       }
     }
 
@@ -56,27 +66,37 @@ class Observer {
   }
 
   static observe(selector, callback) {
-    Observer._debug_selectorCalls[selector] = 0;
     Observer._subscribers.push({
-      selector, callback
+      id: Observer._getSubscriberId(selector), selector, callback
     })
   }
 
   static observeOnce(selector, callback) {
-    Observer._debug_selectorCalls[selector] = 0;
     Observer._subscribers.push({
-      selector, callback, once: true, calledTargets: []
+      id: Observer._getSubscriberId(selector), selector, callback, once: true, calledTargets: []
     })
   }
 
-  //static observeExact(selector, callback) {
-  //  Observer._subscribers.push({
-  //    selector, callback, exact: true
-  //  })
-  //}
+  static observeFirst(selector, callback) {
+    Observer._subscribers.push({
+      id: Observer._getSubscriberId(selector), selector, callback, first: true
+    })
+  }
 
-  static stopObserving(selector) {
-    delete Observer._debug_selectorCalls[selector];
-    Observer._subscribers = Observer._subscribers.filter(item => item.selector != selector);
+  static _getSubscriberId(selector) {
+    Observer._debug_selectorCalls[selector] = 0;
+    Observer._id++;
+    return Observer._id;
+  }
+
+  static stopObserving(id) {
+    //delete Observer._debug_selectorCalls[selector];
+    Observer._subscribers = Observer._subscribers.filter(item => {
+      const keep = item.id != id;
+      if (!keep) {
+        item.stop = true;
+      }
+      return keep;
+    });
   }
 }
