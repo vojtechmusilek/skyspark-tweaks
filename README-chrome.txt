@@ -13,7 +13,7 @@ Code editor:
 - CodeMirror property color
 - CodeMirror bold bracket
 
-Split view (navbar buttons):
+Split view navbar buttons (SkySpark 3.1+):
 - Extend right
 - Extend left
 - Reset size
@@ -21,7 +21,7 @@ Split view (navbar buttons):
 
 Other:
 - Favorite apps in home view
-- Faster project picker
+- Faster project picker (SkySpark 3.1+)
 
 
 
