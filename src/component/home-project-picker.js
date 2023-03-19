@@ -24,5 +24,51 @@ class HomeProjectPicker {
       firstNode, popupInput, popupButtonOk, nodes
     });
 
+    this.focusInput(popupInput);
+
+    $(popupInput).on("input", (event) => {
+      const value = event.target.value.toLowerCase();
+      this.onInput(value, nodes);
+    });
+  }
+
+  onInput(value, nodes) {
+    const regexStr = '.*' + value.split('').join('.*') + '.*';
+    const regex = new RegExp(regexStr);
+    const nodesToHide = [];
+    let firstShowedNode = null;
+
+    for (const node of nodes) {
+      const projName = node.innerText.toLowerCase();
+      const show = regex.test(projName);
+
+      if (show) {
+        $(node).show();
+        if (firstShowedNode == null) {
+          firstShowedNode = node
+        }
+      }
+      else {
+        nodesToHide.push(node);
+      }
+    }
+
+    if (firstShowedNode != null) {
+      $(firstShowedNode).addClass("selected");
+      $(firstShowedNode).click();
+    }
+
+    for (const node of nodesToHide) {
+      $(node).hide();
+    }
+  }
+
+  focusInput(popupInput) {
+    // when unfocused, focus again
+    $(popupInput).blur(() => {
+      $(popupInput).focus();
+    });
+
+    $(popupInput).focus();
   }
 }
