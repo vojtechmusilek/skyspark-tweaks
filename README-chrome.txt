@@ -26,6 +26,8 @@ Other:
 
 * Versions *
 
+2.0.1:
+
 2.0.0:
 - Rebuilt with performance in mind from the ground up
 - Added Chrome icon popup for managing settings
@@ -34,6 +36,7 @@ Other:
 - Added Editor text matching
 - Added navbar buttons for Split View
 - Improved settings to save using Chrome Sync
+- Improved Editor history to not repeat functions
 
 1.4.0:
 - Legacy version
