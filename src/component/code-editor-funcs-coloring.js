@@ -1,6 +1,6 @@
 class CodeEditorFuncsColoring {
   constructor() {
-    Observer.observe("div.domkit-Box.dom-style-autogen-0", this.update.bind(this));
+    Observer.observe(Constant.Selector_EditorFuncs, this.update.bind(this));
   }
 
   colorizedClassName = "skyspark-tweaks-colorized";

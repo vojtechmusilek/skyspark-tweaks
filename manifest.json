@@ -25,6 +25,7 @@
       "js": [
         "lib/jquery-3.6.4.slim.min.js",
         "src/utils.js",
+        "src/constant.js",
         "src/component/code-editor-funcs-coloring.js",
         "src/component/code-editor-funcs-history.js",
         "src/component/code-editor-keep-funcs-search.js",

@@ -27,6 +27,7 @@ Other:
 * Versions *
 
 2.0.1:
+- Fixed Editor not coloring functions in edge case
 
 2.0.0:
 - Rebuilt with performance in mind from the ground up
