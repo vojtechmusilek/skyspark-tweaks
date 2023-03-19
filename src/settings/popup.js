@@ -42,6 +42,11 @@ const settingsDefs = {
     label: "Preserve Editor Search After Refresh",
     type: "checkbox",
   },
+  HomeProjectPicker_enabled: {
+    defVal: false,
+    label: "Faster Project Picker <br> (autofocus, realtime fuzzy search)",
+    type: "checkbox",
+  },
 }
 
 const defTemplate = '<tr><td><label for="{key}">{label}</label></td><td><input type="{type}" {other} id="{key}"></td></tr>';

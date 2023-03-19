@@ -21,6 +21,7 @@ Split view (navbar buttons):
 
 Other:
 - Favorite apps in home view
+- Faster project picker
 
 
 
@@ -28,6 +29,8 @@ Other:
 
 2.0.1:
 - Fixed Editor not coloring functions in edge case
+- Added faster project picker with autofocus and realtime fuzzy search
+  (can be enabled in settings)
 
 2.0.0:
 - Rebuilt with performance in mind from the ground up

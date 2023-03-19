@@ -3,10 +3,10 @@ class HomeProjectPicker {
     Observer.observeOnce(Selector.Popup, this.onPopup.bind(this));
   }
 
-  static classNamePopup = "skyspark-tweaks-popup";
-  static classNameCache = "skyspark-tweaks-cache";
+  async onPopup(popup) {
+    const enabled = await getSettingsValue("HomeProjectPicker_enabled", false);
+    if (!enabled) return;
 
-  onPopup(popup) {
     const popupButtonOk = $(popup).find('div:contains("Ok"):not(:has(*))').get(0);
     if (popupButtonOk == null) return;
 
@@ -20,26 +20,35 @@ class HomeProjectPicker {
 
   onFirstNode(firstNode, popupInput, popupButtonOk) {
     const nodes = $(firstNode).parents(Selector.Popup).find(Selector.PimTreeNode);
-    console.log({
-      firstNode, popupInput, popupButtonOk, nodes
-    });
+    popupInput = this.removeAllListenersFromInput(popupInput);
 
     this.focusInput(popupInput);
+    this.addEvents(popupInput, popupButtonOk, nodes);
+  }
 
+  addEvents(popupInput, popupButtonOk, nodes) {
     $(popupInput).on("input", (event) => {
       const value = event.target.value.toLowerCase();
-      this.onInput(value, nodes);
+      this.onInputFilterNodes(value, nodes);
+    });
+
+    $(popupInput).on("keydown", (event) => {
+      const key = event.key.toLowerCase();
+      this.onKeydown(key, popupButtonOk, nodes);
     });
   }
 
-  onInput(value, nodes) {
+  onInputFilterNodes(value, nodes) {
     const regexStr = '.*' + value.split('').join('.*') + '.*';
     const regex = new RegExp(regexStr);
     const nodesToHide = [];
     let firstShowedNode = null;
 
     for (const node of nodes) {
-      const projName = node.innerText.toLowerCase();
+      const projName = node.innerText
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
       const show = regex.test(projName);
 
       if (show) {
@@ -63,6 +72,43 @@ class HomeProjectPicker {
     }
   }
 
+  onKeydown(key, popupButtonOk, nodes) {
+    if (key == "enter") {
+      popupButtonOk.dispatchEvent(new Event('mousedown'));
+      popupButtonOk.dispatchEvent(new Event('mouseup'));
+      return;
+    }
+
+    if (key == "arrowdown") {
+      this.processArrowKey(1, nodes);
+      return;
+    }
+
+    if (key == "arrowup") {
+      this.processArrowKey(-1, nodes);
+      return;
+    }
+  }
+
+  processArrowKey(change, nodes) {
+    const showedNodes = $(nodes).filter(':visible');
+    for (let i = 0; i < showedNodes.length; i++) {
+      const showedNode = $(showedNodes[i]);
+      if (!showedNode.hasClass("selected")) {
+        continue;
+      }
+
+      const nextNode = $(showedNodes[i + change]);
+      if (nextNode.length == 1) {
+        showedNode.removeClass("selected");
+        nextNode.addClass("selected");
+        nextNode.click();
+      }
+
+      break;
+    }
+  }
+
   focusInput(popupInput) {
     // when unfocused, focus again
     $(popupInput).blur(() => {
@@ -70,5 +116,13 @@ class HomeProjectPicker {
     });
 
     $(popupInput).focus();
+  }
+
+  removeAllListenersFromInput(popupInput) {
+    // to remove all listeners we need to make clone
+    // and then replace old element with clone
+    var clone = popupInput.cloneNode(true);
+    popupInput.parentNode.replaceChild(clone, popupInput);
+    return clone;
   }
 }
