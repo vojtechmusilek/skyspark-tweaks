@@ -2,7 +2,7 @@ Many small features for better user experience in SkySpark.
 
 Customizable features using extension settings.
 
-* Features *
+**Features**
 
 Code editor:
 - Functions camelCase coloring
@@ -25,7 +25,7 @@ Other:
 
 
 
-* Versions *
+**Versions**
 
 2.0.1:
 - Fixed Editor not coloring functions in edge case
