@@ -31,6 +31,7 @@ Other:
 - Fixed Editor not coloring functions in edge case
 - Added faster project picker with autofocus and realtime fuzzy search
   (can be enabled in settings)
+- Changed text matching to not match if and else
 
 2.0.0:
 - Rebuilt with performance in mind from the ground up

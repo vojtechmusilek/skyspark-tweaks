@@ -4,7 +4,7 @@ class CodeEditorMatchText {
   }
 
   dataKey = "skyspark-tweaks-timeout"
-  ignoredTexts = ["(", ")", "{", "}", "[", "]", "do", "end"]
+  ignoredTexts = ["(", ")", "{", "}", "[", "]", "do", "end", "if", "else"]
 
   async update(cursor) {
     const matchEnabled = await getSettingsValue("CodeEditorMatchText_enabled", true);
