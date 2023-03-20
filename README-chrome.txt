@@ -32,6 +32,7 @@ Other:
 - Added faster project picker with autofocus and realtime fuzzy search
   (can be enabled in settings)
 - Changed text matching to not match if and else
+- Fixed text search preserving in Editor when hashing is not available
 
 2.0.0:
 - Rebuilt with performance in mind from the ground up

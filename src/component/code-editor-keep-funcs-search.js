@@ -13,7 +13,7 @@ class CodeEditorKeepFuncsSearch {
 
     $(target).on("input", this.onInput.bind(this));
 
-    const hash = await getNodeHash(target);
+    const hash = getNodeHash(target);
     $(target).data(this.dataKey, hash);
 
     const val = this.tryFillAndGetValue(target, hash);

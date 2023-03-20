@@ -29,7 +29,7 @@ async function getSettingsValue(key, defaultValue) {
   return defaultValue;
 }
 
-async function getNodeHash(node) {
+function getNodeHash(node) {
   const path = [];
   let currentNode = node;
 
@@ -38,7 +38,7 @@ async function getNodeHash(node) {
     currentNode = currentNode.parentNode || currentNode.host;
   }
 
-  return (new Uint8Array(await crypto.subtle.digest("SHA-1", new TextEncoder().encode(path)))).join('')
+  return new TextEncoder().encode(path);
 }
 
 function camelSplit(str) {
