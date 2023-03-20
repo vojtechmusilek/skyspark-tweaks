@@ -19,11 +19,13 @@ class CodeEditorKeepFuncsSearch {
     const val = this.tryFillAndGetValue(target, hash);
     if (val == "") return;
 
+    const valLowerCase = val.toLowerCase();
+
     // perform manual hide, because sometimes functions
     // are not filtered even if the filter is set
     for (const child of $(target).next().children()) {
-      const funcName = child.innerText;
-      if (!funcName.includes(val)) {
+      const funcName = child.innerText.toLowerCase();
+      if (!funcName.includes(valLowerCase)) {
         $(child).hide();
       }
     }
