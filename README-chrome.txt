@@ -28,10 +28,11 @@ Other:
 **Versions**
 
 2.0.1:
-- Fixed Editor not coloring functions in edge case
 - Added faster project picker with autofocus and realtime fuzzy search
-  (can be enabled in settings)
+  (disabled by default, can be enabled in settings)
+- Added version number to settings popup
 - Changed text matching to not match if and else
+- Fixed Editor not coloring functions in edge case
 - Fixed Editor text search preserving when hashing is not available
 - Fixed Editor text search hiding functions that should be visible
 - Fixed Editor coloring to only color Editor funcs and not docs functions

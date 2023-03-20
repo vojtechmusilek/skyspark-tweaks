@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "SkySpark Tweaks",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Adds small tweaks to SkySpark.",
   "icons": {
     "16": "/img/icons/skyspark_tweaks_16.png",
