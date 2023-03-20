@@ -7,6 +7,7 @@ class CodeEditorFuncsColoring {
 
   update(target) {
     if (target.children.length == 0) return;
+    if (isFuncEditorInDocs(target)) return;
 
     this.colorizeFuncs(target.children)
   }

@@ -12,6 +12,7 @@ class CodeEditorFuncsHistory {
   update(target) {
     const parent = $(target).parents(Selector.EditorFuncs).get(0);
     if (!parent) return;
+    if (isFuncEditorInDocs(parent)) return;
 
     this.addCurrentFunc(target, parent)
   }

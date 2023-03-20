@@ -119,6 +119,13 @@ function getProjectName() {
   return window.location.pathname.replace("/ui/", "");
 }
 
+// check if the any sibling is button
+// and in actual editor window there is one
+function isFuncEditorInDocs(node) {
+  const elem = $(node).siblings().filter("div.domkit-control.domkit-control-button.domkit-Button");
+  return elem.length == 0;
+}
+
 function debug() {
   return localStorage.getItem("skysparktweaksdebug") != null;
 }

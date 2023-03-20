@@ -34,6 +34,8 @@ Other:
 - Changed text matching to not match if and else
 - Fixed Editor text search preserving when hashing is not available
 - Fixed Editor text search hiding functions that should be visible
+- Fixed Editor coloring to only color Editor funcs and not docs functions
+- Fixed Editor history to only work in Editor funcs and not docs functions
 
 2.0.0:
 - Rebuilt with performance in mind from the ground up
