@@ -145,3 +145,4 @@ fillElements();
 fillValues();
 
 document.getElementById("save").addEventListener("click", onSaveClick);
+document.getElementById("version").innerText = chrome.runtime.getManifest().version;
